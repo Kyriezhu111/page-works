@@ -14,11 +14,10 @@
   --paper-2:#F2F0EA;
   --ink:#14140F;
   --ink-soft:#56564C;
-  --ink-faint:#8E8E82;
+  --ink-faint:#6B6B60;
   --line:#E0DED5;
   --line-soft:#EBE9E1;
   --blue:#2F4CE0;
-  --blue-soft:#EEF1FE;
   --serif:"Source Han Serif SC","Noto Serif SC","Songti SC","STSong",Georgia,"Times New Roman",serif;
   --sans:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC","Source Han Sans SC",system-ui,sans-serif;
   --mono:Consolas,"SF Mono",Menlo,"Cascadia Mono",monospace;
@@ -152,14 +151,14 @@ section{padding:88px 0}
 .about-grid > div:first-child p{font-size:17px;color:var(--ink-soft);margin:0 0 20px;max-width:36em}
 .about-grid > div:first-child p:first-of-type{font-size:20px;color:var(--ink);font-family:var(--serif);line-height:1.6}
 .sign{font-family:var(--serif);font-size:22px;margin-top:34px;color:var(--ink)}
-.skills h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 18px;font-weight:700}
+.skills-title{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 18px;font-weight:700}
 .skill{margin-bottom:17px}
 .skill-top{display:flex;justify-content:space-between;font-size:14px;margin-bottom:7px}
 .skill-top b{font-weight:600}
 .skill-top span{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
-.bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--ink);width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
-.skill.in .bar i{background:var(--blue)}
+.skill-bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.skill-bar i{display:block;height:100%;background:var(--ink);width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.skill.in .skill-bar i{background:var(--blue)}
 
 /* timeline */
 .tl{position:relative;padding-left:26px}
@@ -517,12 +516,12 @@ footer{border-top:1px solid var(--line-soft);padding:32px 0 84px}
           <p class="sign">林知遥</p>
         </div>
         <div class="skills" data-reveal>
-          <h4>能力</h4>
-          <div class="skill" data-level="92"><div class="skill-top"><b>版式与字体</b><span>熟练</span></div><div class="bar"><i></i></div></div>
-          <div class="skill" data-level="86"><div class="skill-top"><b>品牌视觉 / 标志</b><span>熟练</span></div><div class="bar"><i></i></div></div>
-          <div class="skill" data-level="80"><div class="skill-top"><b>界面设计 · Figma</b><span>熟练</span></div><div class="bar"><i></i></div></div>
-          <div class="skill" data-level="62"><div class="skill-top"><b>前端落地 HTML/CSS</b><span>能自己写</span></div><div class="bar"><i></i></div></div>
-          <div class="skill" data-level="55"><div class="skill-top"><b>动态与动效</b><span>学习中</span></div><div class="bar"><i></i></div></div>
+          <h3 class="skills-title">能力</h3>
+          <div class="skill" data-level="92"><div class="skill-top"><b>版式与字体</b><span>熟练</span></div><div class="skill-bar"><i></i></div></div>
+          <div class="skill" data-level="86"><div class="skill-top"><b>品牌视觉 / 标志</b><span>熟练</span></div><div class="skill-bar"><i></i></div></div>
+          <div class="skill" data-level="80"><div class="skill-top"><b>界面设计 · Figma</b><span>熟练</span></div><div class="skill-bar"><i></i></div></div>
+          <div class="skill" data-level="62"><div class="skill-top"><b>前端落地 HTML/CSS</b><span>能自己写</span></div><div class="skill-bar"><i></i></div></div>
+          <div class="skill" data-level="55"><div class="skill-top"><b>动态与动效</b><span>学习中</span></div><div class="skill-bar"><i></i></div></div>
         </div>
       </div>
     </div>
@@ -615,7 +614,7 @@ footer{border-top:1px solid var(--line-soft);padding:32px 0 84px}
   var skills = document.querySelectorAll('.skill');
   function fillSkill(s){
     s.classList.add('in');
-    s.querySelector('.bar i').style.width = s.getAttribute('data-level') + '%';
+    s.querySelector('.skill-bar i').style.width = s.getAttribute('data-level') + '%';
   }
   if (!('IntersectionObserver' in window)) {
     skills.forEach(fillSkill);

@@ -21,7 +21,7 @@
   --card:#FCFCF8;
   --ink:#1C2320;
   --ink-soft:#5C645D;
-  --ink-faint:#8A918A;
+  --ink-faint:#5F665F;
   --line:#D4D8C9;
   --accent:#CE4A32;
   --accent-deep:#A93624;
@@ -246,7 +246,7 @@ section{scroll-margin-top:74px;padding:104px 0}
   --d-line2:hsl(220 14% 82%);
   --d-accent:#4053E2;
   --d-accent-soft:hsl(228 100% 96%);
-  --d-ok:hsl(142 72% 35%);
+  --d-ok:#14713A;
   --d-ok-soft:hsl(145 64% 96%);
   --d-wait:hsl(32 95% 44%);
   --d-wait-soft:hsl(48 100% 96%);
@@ -494,13 +494,32 @@ footer p{font-size:13px;color:var(--ink-faint);margin:6px 0 0;max-width:520px}
 .cw-v.todo{color:var(--accent-deep);border-bottom:1px dashed currentColor;font-weight:700}
 .cw-note{display:block;font-size:12.5px;color:var(--ink-faint);font-weight:400;margin-top:2px}
 .contact-side{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
-.qr-slot{
-  width:148px;height:148px;border:2px dashed var(--line);border-radius:10px;
-  display:grid;place-items:center;text-align:center;background:var(--paper);
-  font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);line-height:1.6;padding:12px;
-}
-.qr-hint{font-size:12.5px;color:var(--ink-faint);margin:0}
 .contact-side .btn{width:100%;justify-content:center}
+.cw-copy{
+  font-family:var(--sans);font-size:12px;font-weight:700;color:var(--ink-soft);
+  background:var(--paper);border:1px solid var(--line);border-radius:999px;
+  padding:4px 12px;cursor:pointer;margin-left:10px;vertical-align:1px;
+  transition:all .15s ease;
+}
+.cw-copy:hover{border-color:var(--ink-soft);color:var(--ink);background:#fff}
+.cw-v a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line)}
+.cw-v a:hover{border-bottom-color:currentColor}
+.wx-card{
+  width:100%;background:var(--paper);border:1px solid var(--line);border-radius:12px;
+  padding:20px;display:flex;flex-direction:column;gap:10px;
+}
+.wx-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+.wx-id{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  width:100%;background:#fff;border:1px dashed var(--line);border-radius:8px;
+  padding:14px 16px;cursor:pointer;font-family:var(--mono);font-size:19px;font-weight:700;
+  color:var(--ink);letter-spacing:.02em;transition:all .15s ease;
+}
+.wx-id:hover{border-color:var(--accent-deep);border-style:solid;color:var(--accent-deep)}
+.wx-id svg{flex:none;opacity:.5}
+.wx-id:hover svg{opacity:1}
+.wx-hint{font-size:12.5px;color:var(--ink-faint);line-height:1.6;min-height:2.6em}
+.wx-hint.ok{color:#2E7D32;font-weight:700}
 
 @media (max-width:900px){
   .sample-grid{grid-template-columns:1fr}
@@ -830,7 +849,7 @@ Constraints: absolutely NO text, letters, numbers, logos, watermarks; no photore
   </section>
 
   <!-- PROCESS -->
-  <section id="process" class="process">
+  <section id="process">
     <div class="wrap">
       <div class="sec-head" data-reveal>
         <p class="eyebrow">Process · 怎么做</p>
@@ -952,7 +971,7 @@ Constraints: absolutely NO text, letters, numbers, logos, watermarks; no photore
   </section>
 
   <!-- PROTOTYPE -->
-  <section id="prototype" class="prototype">
+  <section id="prototype">
     <div class="wrap">
       <div class="sec-head" data-reveal>
         <p class="eyebrow">Web Artifacts · React 原型演示</p>
@@ -976,22 +995,24 @@ Constraints: absolutely NO text, letters, numbers, logos, watermarks; no photore
     <div class="wrap">
       <div class="sec-head" data-reveal>
         <p class="eyebrow">Review UI · 质检记录</p>
-        <h2>用 review-ui-design 给本页走查</h2>
-        <p>本轮按视觉质量、交互体验、设计系统三个视角检查。发现 1 个真实对比度问题（P1），已修复；完整报告单独成文件。</p>
+        <h2>用 review-ui-design 走查全部四页</h2>
+        <p>主站一页 + 样片三页，各自单独评审，两轮累计 14 个问题。每轮按视觉质量、交互体验、设计系统三个视角检查，报告按轮次单独成文件。</p>
       </div>
 
       <div class="review-summary" data-reveal>
-        <h3>结论：无 P0 遗留；P1 × 1（已修复）；P2 × 2（已记录待确认）</h3>
-        <p>修复项：导航 CTA 与页眉小字原用 #CE4A32 系强调色，白字/红底对比仅 4.27:1、红字/纸底 4.08:1，不达 AA。现改为墨色按钮 + #A93624 强调文字，复测分别 14.99:1 与 5.85:1。另：6 张 AI 生图试稿因水印 / 乱码 / 构图不符全部淘汰，改用代码原生素材。</p>
+        <h3>结论：无 P0 遗留；12 个可修复问题全部修完，剩 3 项需真人 / 真机确认</h3>
+        <p><b>第一轮（主站）</b>：导航 CTA 与页眉小字原用 #CE4A32 系强调色，白字/红底 4.27:1、红字/纸底 4.08:1，不达 AA；改为墨色按钮 + #A93624 强调文字后复测 14.99:1 与 5.85:1。另：6 张 AI 生图试稿因水印 / 乱码 / 构图全部淘汰，改用代码原生素材。<br><b>第二轮（三份样片）</b>：三页各有一个"次要文字色"取值偏浅（3.04–4.43:1），门店页三个主按钮白字压在赭色底上仅 3.67:1，招新页单选项键盘焦点完全不可见，表单错误未与输入框关联，作品集标题层级跳级——共 9 项。<br><b>复评</b>：把自动扫描范围扩大到全部四页（198 组），又扫出 3 个前两轮都漏掉的问题，其中 2 个就挂在主站上。四页复测最低 4.81:1，真实失败 0 组。</p>
       </div>
 
       <div class="review-list" data-reveal>
-        <div class="review-row"><strong>无障碍 · 对比</strong><span><code>scripts/contrast.py</code> 复核正文 #5C645D/#F3F4EC = 5.52:1 PASS；强调文字 #A93624/#F3F4EC = 5.85:1 PASS；深色区 #B9C0B3/#1E2521 = 8.39:1 PASS</span></div>
-        <div class="review-row"><strong>交互 · 状态</strong><span>Playwright 实测原型：切换页面类型、附加项、修改轮数后报价区间即时更新；复制按钮出现"已复制需求单"；无 JS 报错</span></div>
+        <div class="review-row"><strong>无障碍 · 对比</strong><span>四页共 109 组「前景/背景/字号/字重」组合逐组跑 <code>contrast.py</code>。主站：正文 5.52:1、强调 5.85:1、深色区 8.39:1 全 PASS。样片：修复后招新页 <code>--faint</code> 5.72:1、作品集 <code>--ink-faint</code> 5.12:1、门店页 <code>--crust-faint</code> 5.05:1、主按钮 6.67:1，全部达 AA</span></div>
+        <div class="review-row"><strong>无障碍 · 键盘</strong><span>逐一 Tab 走查四页可交互元素。查出招新页单选项焦点不可见（原生 radio 被设为 0×0 + 透明，焦点环画在看不见的元素上），已改为用 <code>:has(input:focus-visible)</code> 把焦点态透传到可视标签，并给不支持 <code>:has()</code> 的浏览器留了 JS 回退；复测焦点环与背景对比 10.48:1</span></div>
+        <div class="review-row"><strong>无障碍 · 表单语义</strong><span>招新页错误提示原先只靠 CSS class 显示，<code>aria-invalid</code> / <code>aria-describedby</code> 计数均为 0，读屏用户提交后听不到哪里错了。现已补齐关联属性、错误文案说明具体原因，并加了 <code>aria-live</code> 状态区播报"有 N 项需要补充"</span></div>
+        <div class="review-row"><strong>交互 · 状态</strong><span>Playwright 实测：原型切换页面类型/附加项/轮数后报价即时更新；样片倒计时按真实日期走、作品筛选与就地展开、门店页"正在营业"按本机时间计算、菜单分类切换、表单空提交拦截标红——全部通过，四页均无 JS 报错</span></div>
+        <div class="review-row"><strong>系统 · 一致性</strong><span>修掉作品集「关于我」下标题由 H2 直接跳 H4 的层级断层；补齐门店页 <code>NO.01</code> 引用但未定义的 <code>.mono</code> 类；清掉三个未被引用的 token。三份样片刻意使用三套视觉语言（独立演示稿、服务不同虚构客户），不按跨页一致性扣分</span></div>
         <div class="review-row"><strong>素材 · 真实性</strong><span>6 张生成试稿逐张目检：智谱免费/付费模型均强制带"AI生成"水印，纸张上出现乱码字母且构图与要求相反；全部淘汰，交付改用本地 SVG / HTML 排版素材</span></div>
         <div class="review-row"><strong>构 · 响应式</strong><span>390px 视口下整页 <code>scrollWidth = 390</code>，无横向溢出；产品表格在窄屏内独立横向滚动</span></div>
-        <div class="review-row"><strong>系统 · 状态覆盖</strong><span>产品演示含空状态开关与语义徽标（点 + 文字，不只靠颜色）；原型覆盖按下/选中/复制反馈</span></div>
-        <div class="review-row"><strong>待确认</strong><span>系统 200% 文字放大、真实读屏朗读、色弱模拟、不同中文渲染字体下的行高——需要真实设备复核</span></div>
+        <div class="review-row"><strong>待确认</strong><span>系统 200% 文字放大、真实读屏朗读、色弱模拟；门店页两处行内链接是否适用 WCAG 2.2 的"行内例外"条款（需人工判定）</span></div>
       </div>
 
       <div class="review-figs" data-reveal>
@@ -1003,10 +1024,20 @@ Constraints: absolutely NO text, letters, numbers, logos, watermarks; no photore
           <img src="review-v2-status.png" alt="V2 状态标注图：6 张生成式试稿淘汰，改用矢量素材">
           <figcaption>V2 状态标注图 · 已替换：生成试稿淘汰 → 矢量标记 + 排版封面</figcaption>
         </figure>
+        <figure>
+          <img src="review-v3-samples-suggestion.png" alt="样片评审优化建议图：改前 / 改后色值对比，含实测对比度">
+          <figcaption>样片评审 · 优化建议图：四组色值改前/改后对比，每个「改后」比值均为 contrast.py 实算（方向示意，非最终稿）</figcaption>
+        </figure>
+        <figure>
+          <img src="review-v4-recheck-status.png" alt="复评状态图：12 项问题的编号、状态与实测变化，附 6 张修复实证截图">
+          <figcaption>复评状态图 · 12 项逐条对照修复前/后实测值；带「复评新发现」标记的 3 项，是前两轮人工检查都漏掉、由全站自动扫描才找出来的</figcaption>
+        </figure>
       </div>
-      <p class="review-note" data-reveal>* 标注图用 DOM 叠加中文编号与说明，页面像素与布局不变，避免生成式标注出现乱码。未生成"优化建议图"：两条问题都已修复或以素材替换解决，没有新的视觉方向需要示意。</p>
+      <p class="review-note" data-reveal>* 标注图用 DOM 叠加中文编号与说明，页面像素与布局不变，避免生成式标注出现乱码。样片的问题标注图（7 个面板、1520×5252）过长，不嵌入本页，请从下方报告链接查看。对比度一律用浏览器内读到的计算样式取色，不靠截图取色——本轮有 3 条自动扫描出的"疑似问题"经复核为半透明背景导致的假阳性，已剔除。</p>
       <div class="review-actions" data-reveal>
-        <a class="btn btn-primary" href="web-design-review-2026-09-09.md" target="_blank" rel="noopener">查看完整评审报告</a>
+        <a class="btn btn-primary" href="web-design-review-2026-09-27-recheck.md" target="_blank" rel="noopener">复评报告 · 全部四页</a>
+        <a class="btn btn-ghost" href="web-design-review-2026-09-27-samples.md" target="_blank" rel="noopener">第二轮报告 · 三份样片</a>
+        <a class="btn btn-ghost" href="web-design-review-2026-09-09.md" target="_blank" rel="noopener">第一轮报告 · 主站</a>
       </div>
     </div>
   </section>
@@ -1062,7 +1093,7 @@ Constraints: absolutely NO text, letters, numbers, logos, watermarks; no photore
         <div class="path-item"><b>第一单换口碑</b>前两单可以平价换真实案例与好评，但底线条款一条不少。</div>
       </div>
 
-      <p class="disclaimer" data-reveal>注：以上价位基于 2026 年闲鱼 / 工房等平台常见挂价整理，市场会变；真实成交以当面谈单为准。展示页里的联系方式和价格请按本人情况替换后再对外使用。</p>
+      <p class="disclaimer" data-reveal>注：以上价位基于 2026 年闲鱼等平台常见挂价整理，市场会变；真实成交以当面谈单为准。这里的区间是参考起点，不是承诺，具体一单一议。</p>
     </div>
   </section>
 
@@ -1082,13 +1113,13 @@ Constraints: absolutely NO text, letters, numbers, logos, watermarks; no photore
           <ul class="contact-ways">
             <li>
               <span class="cw-k">微信</span>
-              <span class="cw-v todo">待填写 · 把你的微信号写在这儿
-                <span class="cw-note">对外发布前必须替换，否则别人找不到你</span>
+              <span class="cw-v">zwx-hh0122<button class="cw-copy" type="button" data-copy="zwx-hh0122" data-hint="wxHint">复制</button>
+                <span class="cw-note">加好友时先说是要做什么页面，通过得快一点</span>
               </span>
             </li>
             <li>
               <span class="cw-k">邮箱</span>
-              <span class="cw-v todo">待填写 · your@email.com</span>
+              <span class="cw-v"><a href="mailto:2572892063@qq.com">2572892063@qq.com</a><button class="cw-copy" type="button" data-copy="2572892063@qq.com">复制</button></span>
             </li>
             <li>
               <span class="cw-k">响应</span>
@@ -1096,13 +1127,22 @@ Constraints: absolutely NO text, letters, numbers, logos, watermarks; no photore
             </li>
             <li>
               <span class="cw-k">服务</span>
-              <span class="cw-v">单页落地 · 作品集 · 门店页 · 后台原型</span>
+              <span class="cw-v">单页落地 · 作品集 · 门店页 · 后台原型<span class="cw-note">价格见上方「看行情」，先问预算再给区间</span></span>
             </li>
           </ul>
         </div>
         <div class="contact-side">
-          <div class="qr-slot">把这里换成<br>你的微信二维码</div>
-          <p class="qr-hint">替换方法：二维码图存成 assets/wechat-qr.png，再把上面的方块换成一段 img 标签。</p>
+          <div class="wx-card">
+            <span class="wx-label">微信号 · 点一下复制</span>
+            <button class="wx-id" type="button" data-copy="zwx-hh0122" data-hint="wxHint">
+              <span>zwx-hh0122</span>
+              <svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true">
+                <rect x="5.5" y="5.5" width="9" height="9" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M11.5 5.5V3.6A1.6 1.6 0 0 0 9.9 2H3.6A1.6 1.6 0 0 0 2 3.6v6.3a1.6 1.6 0 0 0 1.6 1.6h1.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <span class="wx-hint" id="wxHint" role="status" aria-live="polite">直接搜微信号就能加。手机上看这页的话，长按上面那串号复制也行。</span>
+          </div>
           <a class="btn btn-primary" href="#samples">先看样片</a>
         </div>
       </div>
@@ -1115,7 +1155,7 @@ Constraints: absolutely NO text, letters, numbers, logos, watermarks; no photore
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">页工坊<small>PAGE·WORKS · 学生网页工单</small></div>
-      <p>由 Codex 依据本机已装的网页设计技能生成：主站单文件、三份样片单文件、React 原型独立打包，全部零外链。对外使用前，把联系方式换成你自己的。</p>
+      <p>主站单文件、三份样片单文件、React 原型独立打包，全部零外链、无水印、零外部字体。样片中的社团、店铺、人名与地址均为虚构演示，不代表真实客户。</p>
     </div>
     <p class="foot-note">© 2026 页工坊 · 零外链 · 适配手机 · 键盘可达 · 样片内容均为虚构演示</p>
   </div>
@@ -1192,6 +1232,42 @@ Constraints: absolutely NO text, letters, numbers, logos, watermarks; no photore
         applyDsState();
       });
     }
+
+    // Copy-to-clipboard for contact details
+    var wxHint = document.getElementById('wxHint');
+    var wxHintDefault = wxHint ? wxHint.textContent : '';
+    document.querySelectorAll('[data-copy]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var text = btn.getAttribute('data-copy');
+        var hintId = btn.getAttribute('data-hint');
+        var target = hintId ? document.getElementById(hintId) : null;
+        function done() {
+          if (!target) return;
+          target.classList.add('ok');
+          target.textContent = '已复制 ' + text + '，去微信搜索添加就行。';
+          window.setTimeout(function () {
+            target.classList.remove('ok');
+            target.textContent = wxHintDefault;
+          }, 3400);
+        }
+        function fallback() {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); } catch (err) {}
+          document.body.removeChild(ta);
+          done();
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, fallback);
+        } else {
+          fallback();
+        }
+      });
+    });
 
     // Sample previews: scale each 1400px-wide iframe down to fit its card
     var sampleShots = Array.prototype.slice.call(document.querySelectorAll('.sample-shot'));

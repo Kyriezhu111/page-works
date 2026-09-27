@@ -16,9 +16,8 @@
   --panel-line:rgba(255,255,255,.11);
   --star:#EDF1FF;
   --soft:#9AA7C9;
-  --faint:#6B7899;
+  --faint:#7E8BAB;
   --amber:#F2B33D;
-  --amber-deep:#D3931C;
   --cyan:#6FD3E0;
   --ok:#5BD98A;
   --sans:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC","Source Han Sans SC",system-ui,sans-serif;
@@ -213,6 +212,14 @@ form{
 .radios input{position:absolute;opacity:0;width:0;height:0}
 .radios label:hover{border-color:rgba(255,255,255,.3);color:var(--star)}
 .radios label:has(input:checked){background:rgba(242,179,61,.16);border-color:var(--amber);color:var(--amber)}
+.radios label:has(input:focus-visible),
+.radios label.kbd-focus{outline:2px solid var(--amber);outline-offset:3px}
+.form-status{
+  margin:0 0 16px;padding:10px 14px;border-radius:7px;font-size:13.5px;
+  background:rgba(255,138,122,.12);border:1px solid rgba(255,138,122,.45);color:#FFB3A6;
+}
+.form-status:empty{display:none}
+.form-status.ok{background:rgba(91,217,138,.12);border-color:rgba(91,217,138,.45);color:#9BE8B6}
 .submit{
   width:100%;background:var(--amber);color:#14100A;border:0;border-radius:7px;
   font-family:var(--sans);font-size:16px;font-weight:800;padding:15px;cursor:pointer;
@@ -471,15 +478,16 @@ footer{border-top:1px solid var(--panel-line);padding:56px 0 96px;background:rgb
       </div>
 
       <form id="applyForm" novalidate data-reveal>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
         <div class="field" id="f-name">
           <label for="name">姓名 <span>*</span></label>
-          <input id="name" name="name" type="text" placeholder="怎么称呼你" autocomplete="name">
-          <p class="err">请填写姓名</p>
+          <input id="name" name="name" type="text" placeholder="怎么称呼你" autocomplete="name" aria-describedby="err-name">
+          <p class="err" id="err-name">请填写姓名，用于活动分组和群内称呼</p>
         </div>
         <div class="field" id="f-contact">
           <label for="contact">微信号 <span>*</span></label>
-          <input id="contact" name="contact" type="text" placeholder="方便拉你进迎新群" autocomplete="off">
-          <p class="err">请填写微信号</p>
+          <input id="contact" name="contact" type="text" placeholder="方便拉你进迎新群" autocomplete="off" aria-describedby="err-contact">
+          <p class="err" id="err-contact">请填写微信号，我们会用它拉你进迎新群</p>
         </div>
         <div class="field" id="f-grad">
           <label for="college">学院与年级</label>
@@ -492,14 +500,14 @@ footer{border-top:1px solid var(--panel-line);padding:56px 0 96px;background:rgb
           </select>
         </div>
         <div class="field" id="f-track">
-          <label>想加入 <span>*</span></label>
-          <div class="radios">
+          <label id="lb-track">想加入 <span>*</span></label>
+          <div class="radios" role="radiogroup" aria-labelledby="lb-track" aria-describedby="err-track">
             <label><input type="radio" name="track" value="观测组">观测组</label>
             <label><input type="radio" name="track" value="摄影组">摄影组</label>
             <label><input type="radio" name="track" value="科普组">科普组</label>
             <label><input type="radio" name="track" value="还没想好">还没想好</label>
           </div>
-          <p class="err">选一个吧，之后可以改</p>
+          <p class="err" id="err-track">选一条想加入的线，之后可以改</p>
         </div>
         <div class="field">
           <label for="note">想说的话</label>
@@ -624,8 +632,16 @@ footer{border-top:1px solid var(--panel-line);padding:56px 0 96px;background:rgb
   var form = document.getElementById('applyForm');
   var success = document.getElementById('success');
   var successText = document.getElementById('successText');
+  var formStatus = document.getElementById('formStatus');
 
-  function mark(id, bad){ document.getElementById(id).classList.toggle('invalid', bad); }
+  function mark(id, bad){
+    var field = document.getElementById(id);
+    field.classList.toggle('invalid', bad);
+    field.querySelectorAll('input, select, textarea').forEach(function(c){
+      if (bad) { c.setAttribute('aria-invalid', 'true'); }
+      else { c.removeAttribute('aria-invalid'); }
+    });
+  }
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -639,22 +655,37 @@ footer{border-top:1px solid var(--panel-line);padding:56px 0 96px;background:rgb
     if (!track) { mark('f-track', true); bad = true; } else { mark('f-track', false); }
 
     if (bad) {
+      var missing = form.querySelectorAll('.field.invalid').length;
+      formStatus.className = 'form-status';
+      formStatus.textContent = '有 ' + missing + ' 项需要补充，请检查下面标红的字段。';
       var first = form.querySelector('.field.invalid input');
       if (first) first.focus();
       return;
     }
     successText.textContent = name + '，我们已记下你的报名（' + track.value + '），48 小时内通过 ' + contact + ' 联系你。';
+    formStatus.className = 'form-status ok';
+    formStatus.textContent = '提交成功，我们会在 48 小时内通过微信联系你。';
     form.querySelectorAll('.field, .submit, .form-note').forEach(function(n){ n.style.display = 'none'; });
     success.classList.add('on');
   });
 
+  /* 键盘焦点回退：不支持 :has() 的浏览器里，把焦点态透传到可视标签 */
+  var supportsHas = window.CSS && CSS.supports && CSS.supports('selector(:has(a))');
   form.querySelectorAll('input[type="radio"]').forEach(function(r){
     r.addEventListener('change', function(){ mark('f-track', false); });
+    if (!supportsHas) {
+      var lab = r.closest('label');
+      r.addEventListener('focus', function(){ lab.classList.add('kbd-focus'); });
+      r.addEventListener('blur', function(){ lab.classList.remove('kbd-focus'); });
+    }
   });
 
   document.getElementById('again').addEventListener('click', function(){
     form.reset();
     form.querySelectorAll('.field, .submit, .form-note').forEach(function(n){ n.style.display = ''; });
+    form.querySelectorAll('[aria-invalid]').forEach(function(n){ n.removeAttribute('aria-invalid'); });
+    formStatus.className = 'form-status';
+    formStatus.textContent = '';
     success.classList.remove('on');
     document.getElementById('name').focus();
   });
