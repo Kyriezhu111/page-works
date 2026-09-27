@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>页工坊 · 网页设计与实现能力展示</title>
+<meta name="description" content="学生网页设计与实现能力展示：设计方向、整页实现、视觉素材、产品界面与上线前质检。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="页工坊 · 把需求做成能打开的页面">
+<meta property="og:description" content="设计方向 · 整页实现 · 素材 · 上线前质检。">
+<meta property="og:image" content="assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" type="image/svg+xml" href="assets/brand-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
+<style>
+:root{
+  --paper:#F3F4EC;
+  --paper-deep:#E7E9DC;
+  --card:#FCFCF8;
+  --ink:#1C2320;
+  --ink-soft:#5C645D;
+  --ink-faint:#8A918A;
+  --line:#D4D8C9;
+  --accent:#CE4A32;
+  --accent-deep:#A93624;
+  --dark:#1E2521;
+  --dark-line:#39423A;
+  --dark-text:#EDEFE5;
+  --dark-soft:#B9C0B3;
+  --mono:Consolas,"SF Mono",Menlo,"Cascadia Mono",monospace;
+  --sans:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC","Source Han Sans SC",system-ui,sans-serif;
+  --radius:6px;
+  --shadow:0 1px 2px rgba(28,35,32,.05),0 8px 28px -14px rgba(28,35,32,.18);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:#D9C9B8;color:#1C2320}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+img{max-width:100%}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+
+/* ---------- nav ---------- */
+header.site{
+  position:sticky;top:0;z-index:20;
+  background:rgba(243,244,236,.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+nav.bar{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;height:62px;
+}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.brand-mark{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;background:var(--ink);color:var(--paper);
+  font-family:var(--mono);font-size:14px;font-weight:700;letter-spacing:0;
+  border-radius:3px;
+}
+img.brand-mark{background:transparent;border-radius:9px;display:block}
+.brand-name{font-weight:700;font-size:17px;letter-spacing:.02em}
+.brand-name small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--ink-soft);font-weight:400}
+nav.links{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+nav.links a{
+  color:var(--ink-soft);text-decoration:none;font-size:14px;font-weight:600;
+  padding:8px 12px;border-radius:4px;transition:color .16s ease,background .16s ease;
+}
+nav.links a:hover{color:var(--ink);background:rgba(28,35,32,.05)}
+nav.links a.cta{
+  background:var(--ink);color:#F7F8F1;margin-left:8px;box-shadow:0 2px 6px -2px rgba(28,35,32,.4)
+}
+nav.links a.cta:hover{background:#0F1512;color:#fff}
+
+/* ---------- shared section framing ---------- */
+section{scroll-margin-top:74px;padding:104px 0}
+.eyebrow{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--accent-deep);
+  text-transform:uppercase;margin:0 0 16px;font-weight:700;
+}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--accent-deep);display:block}
+.sec-head{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:52px}
+.sec-head h2{font-size:clamp(28px,4vw,40px);line-height:1.25;margin:0;letter-spacing:-.01em;font-weight:800}
+.sec-head p{margin:0;color:var(--ink-soft);max-width:620px;font-size:16px}
+
+/* ---------- hero ---------- */
+.hero{padding:88px 0 96px;position:relative;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent 0 35px,rgba(28,35,32,.035) 35px 36px);
+  pointer-events:none;
+}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;position:relative}
+.kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.14em;
+  color:var(--ink-soft);border:1px solid var(--line);background:var(--card);
+  padding:6px 12px;border-radius:999px;margin-bottom:26px;
+}
+.kicker b{color:var(--accent-deep);font-weight:700}
+.hero h1{font-size:clamp(34px,5.4vw,60px);line-height:1.18;margin:0 0 22px;letter-spacing:-.02em;font-weight:850}
+.hero .lead{font-size:17px;color:var(--ink-soft);max-width:52ch;margin:0 0 32px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;font-weight:700;font-size:15px;padding:12px 20px;
+  border-radius:var(--radius);transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
+}
+.btn-primary{background:var(--ink);color:#F7F8F1;box-shadow:0 4px 14px -6px rgba(28,35,32,.5)}
+.btn-primary:hover{background:#0F1512;transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--ink);transform:translateY(-1px)}
+.hero-note{font-size:13px;color:var(--ink-faint);margin:18px 0 0;font-family:var(--mono)}
+
+/* job ticket */
+.ticket{
+  position:relative;background:var(--card);border:1px solid var(--line);
+  border-radius:8px;box-shadow:var(--shadow);
+  padding:30px 32px 28px;transform:rotate(.5deg);
+}
+.ticket::before{
+  content:"";position:absolute;inset:9px -7px -7px 9px;z-index:-1;
+  background:var(--paper-deep);border:1px solid var(--line);border-radius:8px;
+}
+.ticket-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.ticket-top .mono-label{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--ink-faint);font-weight:700}
+.ticket-top .no{font-family:var(--mono);font-size:13px;color:var(--accent-deep);letter-spacing:.06em;font-weight:700}
+.ticket-title{font-size:24px;font-weight:800;margin:16px 0 4px;letter-spacing:-.01em}
+.ticket-sub{font-size:14px;color:var(--ink-soft);margin:0 0 20px}
+.ticket-fields{border-top:1px dashed var(--line)}
+.field{
+  display:grid;grid-template-columns:112px 1fr;gap:16px;
+  padding:11px 0;border-bottom:1px dashed var(--line);
+  font-size:14px;
+}
+.field dt{font-family:var(--mono);font-size:12px;color:var(--ink-faint);margin:0;padding-top:2px}
+.field dd{margin:0;color:var(--ink)}
+.ticket-foot{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:20px;flex-wrap:wrap}
+.stamp{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;
+  color:var(--accent-deep);border:2px solid var(--accent);border-radius:4px;
+  padding:4px 10px;transform:rotate(-3deg);background:rgba(206,74,50,.05);
+}
+.ticket-foot p{font-size:13px;color:var(--ink-soft);margin:0}
+.hero-marks{position:absolute;top:-14px;right:-10px;width:22px;height:22px;border-top:2px solid var(--accent);border-right:2px solid var(--accent);opacity:.75}
+
+/* ---------- assets ---------- */
+.assets{background:var(--paper)}
+.assets-grid{display:grid;grid-template-columns:360px 1fr;gap:22px;align-items:start}
+.asset-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:24px}
+.mark-showcase{display:flex;align-items:center;gap:18px}
+.mark-showcase img{width:92px;height:92px;display:block;flex:0 0 auto}
+.mark-showcase h3{margin:0 0 6px;font-size:17px;font-weight:800}
+.mark-showcase p{margin:0;font-size:13px;color:var(--ink-soft)}
+.favicon-row{display:flex;align-items:flex-end;gap:22px;margin-top:22px;padding-top:20px;border-top:1px dashed var(--line)}
+.favicon-row figure{margin:0;text-align:center}
+.favicon-row img{display:block;margin:0 auto;background:transparent}
+.favicon-row figcaption{font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:7px}
+.asset-files{font-family:var(--mono);font-size:11px;line-height:1.7;color:var(--ink-faint);margin:18px 0 0;word-break:break-all}
+.og-preview{margin:0}
+.og-preview img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.og-preview figcaption{font-size:12px;color:var(--ink-faint);margin-top:10px;line-height:1.6}
+.asset-note{margin:22px 0 0;font-size:13px;color:var(--ink-soft);line-height:1.75}
+.asset-note b{color:var(--ink)}
+.prompt-box{margin-top:18px;border:1px solid var(--line);border-radius:8px;background:var(--card);overflow:hidden}
+.prompt-box summary{cursor:pointer;padding:14px 18px;font-size:13px;font-weight:700;color:var(--ink)}
+.prompt-box summary:hover{background:rgba(28,35,32,.04)}
+.prompt-box pre{margin:0;padding:0 18px 18px;font-family:var(--mono);font-size:11px;line-height:1.7;white-space:pre-wrap;color:var(--ink-soft);max-height:300px;overflow:auto}
+
+/* ---------- services ---------- */
+.services{background:var(--paper);}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.svc{
+  background:var(--card);border:1px solid var(--line);border-radius:8px;
+  padding:24px 22px 20px;position:relative;display:flex;flex-direction:column;
+  transition:border-color .16s ease,transform .16s ease,box-shadow .16s ease;
+}
+.svc:hover{border-color:var(--ink);transform:translateY(-3px);box-shadow:var(--shadow)}
+.svc .tag{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:.1em;border:1px solid var(--line);padding:2px 8px;border-radius:3px}
+.svc h3{font-size:18px;margin:6px 0 8px;font-weight:800}
+.svc p{font-size:14px;color:var(--ink-soft);margin:0 0 14px;flex:1}
+.svc .who{font-size:12px;color:var(--ink-faint);border-top:1px dashed var(--line);padding-top:10px;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.chip{
+  font-family:var(--mono);font-size:11px;color:var(--accent-deep);
+  background:rgba(206,74,50,.07);border:1px solid rgba(206,74,50,.3);
+  padding:2px 8px;border-radius:3px;letter-spacing:.02em;
+}
+.svc-wide{grid-column:span 3;flex-direction:row;align-items:center;gap:24px}
+.svc-wide .copy{flex:1}
+.svc-wide .chips{margin:0}
+
+/* ---------- toolbox ---------- */
+.toolbox{background:var(--paper-deep);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tool-list{border-top:1px solid var(--line)}
+.tool-row{
+  display:grid;grid-template-columns:250px 1fr 150px;gap:22px;align-items:baseline;
+  padding:16px 4px;border-bottom:1px solid var(--line);
+}
+.tool-row:hover{background:rgba(255,255,255,.45)}
+.tool-name{display:flex;flex-direction:column;gap:3px}
+.tool-name strong{font-size:15px;font-weight:800}
+.tool-name em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--accent-deep);letter-spacing:.03em}
+.tool-row .desc{font-size:14px;color:var(--ink-soft);margin:0}
+.tool-use{font-family:var(--mono);font-size:11px;color:var(--ink-faint);letter-spacing:.04em;text-align:right}
+.toolbox-note{font-size:13px;color:var(--ink-soft);margin:18px 0 0}
+
+/* ---------- workflow ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:step}
+.step{
+  background:var(--card);border:1px solid var(--line);border-radius:8px;
+  padding:22px;position:relative;
+}
+.step::before{
+  counter-increment:step;content:"0" counter(step);
+  font-family:var(--mono);font-size:13px;color:var(--paper);
+  background:var(--accent);display:inline-block;padding:2px 8px;border-radius:3px;
+  letter-spacing:.06em;margin-bottom:14px;
+}
+.step h3{font-size:17px;margin:0 0 8px;font-weight:800}
+.step p{font-size:14px;color:var(--ink-soft);margin:0}
+.step b{color:var(--ink)}
+
+/* ---------- SaaS product demo (saas-product-ui-system tokens) ---------- */
+.product-ui{background:var(--paper-deep);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.demo-app{
+  --d-canvas:hsl(220 23% 97%);
+  --d-surface:hsl(0 0% 100%);
+  --d-subtle:hsl(220 18% 96%);
+  --d-inset:hsl(220 18% 94%);
+  --d-ink:#1A1F2E;
+  --d-ink2:#535B6A;
+  --d-ink3:#6F7686;
+  --d-line:hsl(220 16% 90%);
+  --d-line2:hsl(220 14% 82%);
+  --d-accent:#4053E2;
+  --d-accent-soft:hsl(228 100% 96%);
+  --d-ok:hsl(142 72% 35%);
+  --d-ok-soft:hsl(145 64% 96%);
+  --d-wait:hsl(32 95% 44%);
+  --d-wait-soft:hsl(48 100% 96%);
+  --d-radius:12px;
+  background:var(--d-canvas);color:var(--d-ink);
+  border:1px solid var(--d-line2);border-radius:14px;
+  box-shadow:var(--shadow);
+  font-size:14px;line-height:1.55;
+}
+.demo-app *{box-sizing:border-box}
+.demo-topbar{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  background:var(--d-surface);border-bottom:1px solid var(--d-line);
+  border-radius:14px 14px 0 0;padding:12px 20px;
+}
+.demo-brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px}
+.demo-brand .mark{width:26px;height:26px;border-radius:6px;background:var(--d-accent);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}
+.demo-topbar .crumb{font-family:var(--mono);font-size:11px;color:var(--d-ink3);letter-spacing:.04em}
+.demo-topbar .crumb i{font-style:normal;color:var(--d-ink2)}
+.demo-page{padding:22px 20px 24px}
+.demo-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.demo-title-row h3{margin:0;font-size:20px;font-weight:750;letter-spacing:-.01em}
+.demo-title-row p{margin:3px 0 0;font-size:13px;color:var(--d-ink2)}
+.ds-btn{
+  display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+  border:0;cursor:pointer;font:inherit;font-weight:600;font-size:13px;
+  border-radius:8px;padding:8px 13px;background:var(--d-accent);color:#fff;
+  transition:background .15s ease,transform .15s ease;
+}
+.ds-btn:hover{background:hsl(235 69% 50%);transform:translateY(-1px)}
+.ds-btn.ghost{background:var(--d-surface);color:var(--d-ink);border:1px solid var(--d-line);box-shadow:none}
+.ds-btn.ghost:hover{background:var(--d-subtle);transform:none}
+.demo-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.ds-kpi{background:var(--d-surface);border:1px solid var(--d-line);border-radius:var(--d-radius);padding:14px 15px}
+.ds-kpi span{display:block;font-size:12px;color:var(--d-ink2);margin-bottom:4px}
+.ds-kpi b{display:flex;align-items:baseline;gap:8px;font-family:var(--mono);font-size:26px;font-weight:700;letter-spacing:-.02em}
+.ds-kpi b small{font-family:var(--sans);font-size:11px;color:var(--d-ok);font-weight:600}
+.ds-kpi .sub{font-size:11px;color:var(--d-ink3);margin-top:3px}
+.demo-layout{display:grid;grid-template-columns:1.5fr 1fr;gap:12px;margin-top:12px}
+.ds-panel{background:var(--d-surface);border:1px solid var(--d-line);border-radius:var(--d-radius);padding:16px}
+.ds-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.ds-panel-head h4{margin:0;font-size:14px;font-weight:700}
+.ds-panel-head span{font-size:12px;color:var(--d-ink2)}
+.ds-chart{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;height:150px;align-items:end}
+.ds-bar-col{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:7px;height:100%}
+.ds-track{width:100%;max-width:34px;height:100%;display:flex;align-items:flex-end;background:var(--d-inset);border-radius:5px;overflow:hidden}
+.ds-track i{display:block;width:100%;background:var(--d-accent);border-radius:5px;height:var(--h,50%);opacity:.92}
+.ds-bar-col:nth-last-child(-n+2) .ds-track i{background:hsl(233 74% 62%)}
+.ds-bar-col span{font-family:var(--mono);font-size:10px;color:var(--d-ink2)}
+.ds-bar-col b{font-family:var(--mono);font-size:11px;color:var(--d-ink);font-weight:600}
+.ds-todo{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.ds-todo li{display:flex;gap:10px;align-items:flex-start;padding:8px 2px;border-bottom:1px dashed var(--d-line);font-size:13px}
+.ds-todo li:last-child{border-bottom:0}
+.dot{flex:0 0 auto;width:8px;height:8px;border-radius:50%;margin-top:6px;background:var(--d-wait)}
+.dot.ok{background:var(--d-ok)}
+.dot.new{background:var(--d-accent)}
+.ds-todo b{font-weight:600;display:block;font-size:13px}
+.ds-todo span{color:var(--d-ink2);font-size:12px}
+.ds-todo time{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--d-ink3);white-space:nowrap}
+.demo-table-card{margin-top:12px}
+.ds-filter{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.ds-tab{
+  border:1px solid var(--d-line);background:var(--d-surface);color:var(--d-ink2);
+  font:inherit;font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;cursor:pointer;
+}
+.ds-tab[aria-pressed="true"]{background:var(--d-accent-soft);color:var(--d-accent);border-color:hsl(228 90% 78%)}
+.ds-table-wrap{overflow-x:auto;margin-top:14px;border:1px solid var(--d-line);border-radius:10px}
+.ds-table{width:100%;border-collapse:collapse;min-width:560px;font-size:13px;background:var(--d-surface)}
+.ds-table th{text-align:left;font-size:12px;font-weight:600;color:var(--d-ink2);background:var(--d-subtle);padding:9px 12px;border-bottom:1px solid var(--d-line)}
+.ds-table td{padding:10px 12px;border-bottom:1px solid var(--d-line);vertical-align:middle}
+.ds-table tr:last-child td{border-bottom:0}
+.ds-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.ds-badge::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}
+.ds-badge.ok{background:var(--d-ok-soft);color:var(--d-ok)}
+.ds-badge.wait{background:var(--d-wait-soft);color:hsl(28 80% 30%)}
+.ds-badge.new{background:var(--d-accent-soft);color:var(--d-accent)}
+.ds-cell-empty{color:var(--d-ink2);font-size:13px;padding:22px 12px !important;text-align:center}
+.demo-caption{font-size:12px;color:var(--ink-soft);margin:14px 0 0;line-height:1.6}
+.demo-caption b{color:var(--ink)}
+
+/* ---------- prototype iframe ---------- */
+.proto-stage{margin-bottom:18px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+.proto-stage iframe{display:block;width:100%;height:790px;border:0;background:hsl(220 23% 98%)}
+.proto-note{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.proto-note p{margin:0;font-size:13px;color:var(--ink-soft);max-width:760px}
+
+/* ---------- review record ---------- */
+.review{background:var(--paper)}
+.review-summary{border:1px solid var(--line);border-left:3px solid var(--accent-deep);background:var(--card);border-radius:8px;padding:20px 22px;margin-bottom:22px}
+.review-summary h3{margin:0 0 6px;font-size:16px;font-weight:800}
+.review-summary p{margin:0;font-size:14px;color:var(--ink-soft)}
+.review-list{border-top:1px solid var(--line)}
+.review-row{display:grid;grid-template-columns:170px 1fr;gap:16px;padding:13px 4px;border-bottom:1px solid var(--line);align-items:baseline}
+.review-row strong{font-size:13px;color:var(--ink)}
+.review-row span{font-size:13px;color:var(--ink-soft)}
+.review-row code{font-family:var(--mono);font-size:11px;background:rgba(28,35,32,.05);padding:1px 6px;border-radius:3px;color:var(--accent-deep)}
+.pass{color:var(--ink) !important}
+.review-note{font-size:12px;color:var(--ink-faint);margin:16px 0 0;line-height:1.7}
+.review-actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.review-figs{display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:24px}
+.review-figs figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;max-width:100%}
+.review-figs img{display:block;width:auto;max-width:100%;height:auto}
+.review-figs figcaption{font-size:12px;color:var(--ink-faint);padding:10px 12px;border-top:1px solid var(--line);line-height:1.6}
+
+/* ---------- earn / faq dark ---------- */
+.reality{background:var(--dark);color:var(--dark-text)}
+.reality .eyebrow{color:#E9A18F}
+.reality .eyebrow::before{background:#E9A18F}
+.reality .sec-head p{color:var(--dark-soft)}
+.answer{
+  background:rgba(255,255,255,.04);border:1px solid var(--dark-line);border-radius:10px;
+  padding:26px 28px;margin-bottom:34px;
+}
+.answer .big{font-size:clamp(19px,2.4vw,25px);font-weight:800;line-height:1.5;margin:0}
+.answer .big span{color:#E9A18F}
+.answer p{margin:10px 0 0;color:var(--dark-soft);font-size:15px}
+.earn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.earn-card{background:rgba(255,255,255,.035);border:1px solid var(--dark-line);border-radius:8px;padding:22px}
+.earn-card h3{font-size:14px;font-family:var(--mono);letter-spacing:.12em;color:#E9A18F;margin:0 0 16px;font-weight:700}
+.earn-card ul{list-style:none;margin:0;padding:0}
+.earn-card li{font-size:14px;color:var(--dark-soft);padding:7px 0 7px 20px;position:relative;border-bottom:1px dashed rgba(255,255,255,.07)}
+.earn-card li:last-child{border-bottom:none}
+.earn-card li::before{content:"·";position:absolute;left:2px;color:#E9A18F;font-weight:700}
+.price-list{font-family:var(--mono);font-size:13px;line-height:2}
+.price-list b{color:var(--dark-text)}
+.disclaimer{
+  margin-top:26px;font-size:12px;color:var(--dark-soft);opacity:.8;
+  border-left:2px solid var(--dark-line);padding-left:14px;
+}
+.start-path{
+  margin-top:42px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+}
+.path-item{
+  border:1px dashed var(--dark-line);border-radius:8px;padding:16px 18px;
+  font-size:14px;color:var(--dark-soft);
+}
+.path-item b{display:block;color:var(--dark-text);margin-bottom:4px;font-size:15px}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:46px 0 56px;background:var(--paper)}
+.foot-grid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
+.foot-brand{font-weight:800;font-size:16px}
+.foot-brand small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-faint);font-weight:400;margin-top:6px}
+footer p{font-size:13px;color:var(--ink-faint);margin:6px 0 0;max-width:520px}
+.foot-note{font-size:12px;color:var(--ink-faint);margin-top:28px;font-family:var(--mono)}
+
+/* ---------- reveal & motion ---------- */
+[data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+[data-reveal].is-in{opacity:1;transform:none}
+.stagger > *{transition-delay:calc(var(--d,0)*80ms)}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none !important;animation:none !important}
+  [data-reveal]{opacity:1;transform:none}
+}
+@media print{
+  [data-reveal]{opacity:1 !important;transform:none !important}
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:1000px){
+  .hero-grid{grid-template-columns:1fr;gap:56px}
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .svc-wide{grid-column:span 2}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .earn-grid{grid-template-columns:1fr}
+  .start-path{grid-template-columns:1fr}
+  .tool-row{grid-template-columns:1fr;gap:6px}
+  .tool-use{text-align:left}
+  .demo-kpis{grid-template-columns:repeat(2,1fr)}
+  .demo-layout{grid-template-columns:1fr}
+  .review-row{grid-template-columns:1fr;gap:2px}
+  .proto-stage iframe{height:850px}
+  .assets-grid{grid-template-columns:1fr}
+  .review-figs{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  section{padding:72px 0}
+  nav.bar{height:auto;padding:10px 0;align-items:flex-start}
+  nav.bar{flex-direction:column;gap:8px}
+  nav.links{width:100%;overflow-x:auto;padding-bottom:4px}
+  nav.links a{white-space:nowrap}
+  nav.links a.cta{margin-left:4px}
+  .svc-grid{grid-template-columns:1fr}
+  .svc-wide{grid-column:span 1;flex-direction:column;align-items:flex-start}
+  .steps{grid-template-columns:1fr}
+  .field{grid-template-columns:1fr;gap:2px}
+  .ticket{padding:22px}
+  .hero{padding:56px 0 72px}
+  .demo-app{border-radius:10px}
+  .demo-topbar{border-radius:10px 10px 0 0;padding:10px 14px}
+  .demo-page{padding:16px 14px 20px}
+  .demo-kpis{grid-template-columns:1fr 1fr;gap:8px}
+  .ds-kpi{padding:11px 12px}
+  .ds-kpi b{font-size:22px}
+  .proto-stage iframe{height:1010px}
+  .review-summary{padding:16px}
+  .proto-note{align-items:flex-start;flex-direction:column}
+}
+
+/* ---------- samples ---------- */
+.samples{background:var(--dark);color:var(--dark-text)}
+.samples .sec-head h2{color:#fff}
+.samples .sec-head p{color:var(--dark-soft)}
+.samples .eyebrow{color:#E9A091}
+.samples .eyebrow::before{background:#E9A091}
+.sample-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.sample-card{
+  display:flex;flex-direction:column;text-decoration:none;color:inherit;
+  background:rgba(255,255,255,.045);border:1px solid var(--dark-line);border-radius:12px;
+  overflow:hidden;transition:transform .22s ease,border-color .22s ease,background .22s ease;
+}
+.sample-card:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.075)}
+.sample-card:focus-visible{outline:2px solid #E9A091;outline-offset:3px}
+.sample-shot{position:relative;height:300px;overflow:hidden;background:#0B0E0A;border-bottom:1px solid var(--dark-line)}
+.sample-shot iframe{position:absolute;left:0;top:0;width:1400px;height:1000px;border:0;transform-origin:0 0;pointer-events:none}
+.sample-shot::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.45))}
+.sample-body{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1}
+.sample-tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#E9A091;margin-bottom:10px}
+.sample-body h3{font-size:17.5px;margin:0 0 8px;font-weight:700;color:#fff}
+.sample-body > p{margin:0 0 16px;color:var(--dark-soft);font-size:14px}
+.sample-feats{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:7px}
+.sample-feats li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;color:var(--dark-soft)}
+.sample-feats li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;background:#E9A091;margin-top:8px}
+.sample-open{margin-top:auto;font-size:14px;font-weight:700;color:#fff;display:flex;align-items:center;gap:7px}
+.sample-card:hover .sample-open{color:#E9A091}
+.sample-note{margin:26px 0 0;font-size:13.5px;color:#9AA394;max-width:62em}
+
+/* ---------- contact ---------- */
+.contact-card{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:34px;display:grid;grid-template-columns:1.15fr .85fr;gap:44px;box-shadow:var(--shadow);
+}
+.contact-card h3{font-size:22px;margin:0 0 12px;font-weight:800}
+.contact-lede{margin:0 0 22px;color:var(--ink-soft);font-size:15.5px}
+.contact-ways{list-style:none;padding:0;margin:0;display:grid;gap:0}
+.contact-ways li{
+  display:grid;grid-template-columns:74px 1fr;gap:16px;align-items:baseline;
+  padding:13px 0;border-bottom:1px solid var(--line);
+}
+.contact-ways li:last-child{border-bottom:0}
+.cw-k{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--ink-faint)}
+.cw-v{font-size:15px;font-weight:600}
+.cw-v.todo{color:var(--accent-deep);border-bottom:1px dashed currentColor;font-weight:700}
+.cw-note{display:block;font-size:12.5px;color:var(--ink-faint);font-weight:400;margin-top:2px}
+.contact-side{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.qr-slot{
+  width:148px;height:148px;border:2px dashed var(--line);border-radius:10px;
+  display:grid;place-items:center;text-align:center;background:var(--paper);
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);line-height:1.6;padding:12px;
+}
+.qr-hint{font-size:12.5px;color:var(--ink-faint);margin:0}
+.contact-side .btn{width:100%;justify-content:center}
+
+@media (max-width:900px){
+  .sample-grid{grid-template-columns:1fr}
+  .sample-shot{height:230px}
+  .contact-card{grid-template-columns:1fr;gap:30px;padding:26px}
+}
+@media (max-width:640px){
+  .sample-shot{height:190px}
+}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <nav class="bar" aria-label="主导航">
+      <a class="brand" href="#top" aria-label="页工坊 回到顶部">
+        <img class="brand-mark" src="assets/brand-mark.svg" width="34" height="34" alt="">
+        <span class="brand-name">页工坊<small>PAGE·WORKS</small></span>
+      </a>
+      <div class="links">
+        <a href="#samples">样片</a>
+        <a href="#services">能做什么</a>
+        <a href="#assets">视觉素材</a>
+        <a href="#toolbox">工具箱</a>
+        <a href="#process">怎么做</a>
+        <a href="#product-ui">产品 UI</a>
+        <a href="#prototype">React 原型</a>
+        <a href="#review">质检记录</a>
+        <a class="cta" href="#contact">聊需求</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div data-reveal>
+        <span class="kicker">学生网页设计 · 本地技能工具箱 <b>READY</b></span>
+        <h1>把需求，做成能打开的页面。</h1>
+        <p class="lead">从一张需求工单开始：设计方向、整页实现、配图素材、上线前质检，一条线走完。适合社团招新页、个人作品集、本地小店门面、课题展示和比赛原型。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#services">看看能做什么</a>
+          <a class="btn btn-ghost" href="#reality">报价参考</a>
+        </div>
+        <p class="hero-note">// 单文件 HTML · 双击可预览 · 无外部依赖</p>
+      </div>
+
+      <div class="ticket" data-reveal style="--d:1" role="img" aria-label="一张示例页面工单：先定需求范围，再报价开工">
+        <span class="hero-marks" aria-hidden="true"></span>
+        <div class="ticket-top">
+          <span class="mono-label">JOB TICKET · 页面工单</span>
+          <span class="no">NO.2026-0001</span>
+        </div>
+        <h2 class="ticket-title">示例：社团招新落地页</h2>
+        <p class="ticket-sub">拿到单子先写清范围，范围不清不报价。</p>
+        <dl class="ticket-fields">
+          <div class="field"><dt>页面类型</dt><dd>落地页 · 一页式官网</dd></div>
+          <div class="field"><dt>给谁看</dt><dd>大一新生 / 可能的赞助方</dd></div>
+          <div class="field"><dt>交付清单</dt><dd>响应式页面 + 配图图标 + 上线说明</dd></div>
+          <div class="field"><dt>工期</dt><dd>1–3 天（按内容量定）</dd></div>
+          <div class="field"><dt>报价</dt><dd>先给区间，确认范围后锁价</dd></div>
+          <div class="field"><dt>修改规则</dt><dd>2 轮以内，超出另计</dd></div>
+        </dl>
+        <div class="ticket-foot">
+          <p>范围 → 报价 → 开工 → 验收</p>
+          <span class="stamp">可接单 · 先定范围</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Capabilities · 能做什么</p>
+        <h2>六类网页活儿，一套工具链</h2>
+        <p>每个能力背后都对应已安装并实测过的 skill。做之前我会先问你三件事：给谁看、要达成什么、什么时候要。</p>
+      </div>
+      <div class="svc-grid stagger">
+        <article class="svc" data-reveal style="--d:0">
+          <span class="tag">SITE</span>
+          <h3>落地页 · 展示官网</h3>
+          <p>社团招新、小店门面、活动报名、课题展示。一页讲清「你是谁 → 提供什么 → 怎么找到你」。</p>
+          <p class="who">典型场景：社团、本地小店、工作室、老师课题组</p>
+          <div class="chips"><span class="chip">frontend-design</span><span class="chip">image-logo-icons</span></div>
+        </article>
+
+        <article class="svc" data-reveal style="--d:1">
+          <span class="tag">PORTFOLIO</span>
+          <h3>个人站 · 作品集</h3>
+          <p>简历页、摄影 / 写作 / 视频作品集、知识库入口。比纸质简历多出来的能力是：可以点、可以滚、能放视频。</p>
+          <p class="who">典型场景：求职简历、自媒体主页、毕业设计展示</p>
+          <div class="chips"><span class="chip">frontend-design</span><span class="chip">imagegen</span></div>
+        </article>
+
+        <article class="svc" data-reveal style="--d:2">
+          <span class="tag">APP UI</span>
+          <h3>产品后台 · 功能界面</h3>
+          <p>记账、课表、社团管理、数据看板——「看起来有正经功能」的界面：层级清楚，空状态、加载态、错误态都设计好。</p>
+          <p class="who">典型场景：工具型产品、管理后台、课程项目</p>
+          <div class="chips"><span class="chip">saas-product-ui-system</span><span class="chip">saas-ui-ux-designer</span><span class="chip">ui-ux-design-system</span></div>
+        </article>
+
+        <article class="svc" data-reveal style="--d:3">
+          <span class="tag">PROTOTYPE</span>
+          <h3>原型 · 交互演示</h3>
+          <p>创业、比赛、毕设需要「能点的演示」：先做出可交互原型，评委和合伙人不用靠想象力。</p>
+          <p class="who">典型场景：互联网+、大创、路演 Demo</p>
+          <div class="chips"><span class="chip">web-artifacts-builder</span></div>
+        </article>
+
+        <article class="svc" data-reveal style="--d:4">
+          <span class="tag">ASSETS</span>
+          <h3>视觉素材</h3>
+          <p>Logo、图标、favicon、社交封面：先出结构化方案再生成图，一套视觉语言贯穿到底，小尺寸也看得清。</p>
+          <p class="who">典型场景：品牌起步、社媒开张、网页配图</p>
+          <div class="chips"><span class="chip">image-logo-icons</span><span class="chip">imagegen</span></div>
+        </article>
+
+        <article class="svc" data-reveal style="--d:5">
+          <span class="tag">REVIEW</span>
+          <h3>改稿 · 质检</h3>
+          <p>已有页面或设计稿的专家走查：视觉、交互、设计系统三个视角找问题，按优先级给出修改建议和标注图。</p>
+          <p class="who">典型场景：交付前自检、别人稿子的二次把关</p>
+          <div class="chips"><span class="chip">review-ui-design</span></div>
+        </article>
+
+        <article class="svc svc-wide" data-reveal>
+          <div class="copy">
+            <h3>相邻能力：微信小程序</h3>
+            <p>网页之外的扩展线——小程序原生开发、云开发与体验版发布的工作流也已就绪。需要「先网页验证、再小程序落地」的产品可以整体接。</p>
+          </div>
+          <div class="chips"><span class="chip">wechat-miniprogram-workflow</span><span class="chip">wechat-miniprogram-skill</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAMPLES -->
+  <section id="samples" class="samples">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Samples · 样片</p>
+        <h2>三个样片，都能点开。</h2>
+        <p>下面不是截图——每张卡片里跑的是真实页面。点开可以看到完整的交互：倒计时、筛选、表单校验、实时营业状态。三个样片用了三套完全不同的视觉方向，用来证明同一双手能做出不同味道。</p>
+      </div>
+
+      <div class="sample-grid" id="sampleGrid">
+        <a class="sample-card" href="works/club-recruit.html" target="_blank" rel="noopener" data-reveal>
+          <div class="sample-shot">
+            <iframe src="works/club-recruit.html" title="社团招新页预览" tabindex="-1" aria-hidden="true"></iframe>
+          </div>
+          <div class="sample-body">
+            <span class="sample-tag">样片 01 · 社团招新</span>
+            <h3>星野天文社 · 招新页</h3>
+            <p>深色夜空 + 实时倒计时 + 表单校验，开学季最好卖的一类单子。</p>
+            <ul class="sample-feats">
+              <li>倒计时按真实日期走，不是贴图</li>
+              <li>表单空提交会被拦下来并标红</li>
+              <li>手机端自动换成单栏</li>
+            </ul>
+            <span class="sample-open">点开看完整页面 ↗</span>
+          </div>
+        </a>
+
+        <a class="sample-card" href="works/portfolio.html" target="_blank" rel="noopener" data-reveal style="transition-delay:.08s">
+          <div class="sample-shot">
+            <iframe src="works/portfolio.html" title="个人作品集预览" tabindex="-1" aria-hidden="true"></iframe>
+          </div>
+          <div class="sample-body">
+            <span class="sample-tag">样片 02 · 个人作品集</span>
+            <h3>林知遥 · 设计师作品集</h3>
+            <p>编辑风排版，大字与留白撑场面，靠内容结构而不是花哨动效。</p>
+            <ul class="sample-feats">
+              <li>作品可按类型筛选</li>
+              <li>点标题原地展开项目详情</li>
+              <li>技能条滚动到位才填充</li>
+            </ul>
+            <span class="sample-open">点开看完整页面 ↗</span>
+          </div>
+        </a>
+
+        <a class="sample-card" href="works/shop.html" target="_blank" rel="noopener" data-reveal style="transition-delay:.16s">
+          <div class="sample-shot">
+            <iframe src="works/shop.html" title="小店门面页预览" tabindex="-1" aria-hidden="true"></iframe>
+          </div>
+          <div class="sample-body">
+            <span class="sample-tag">样片 03 · 小店门面</span>
+            <h3>拾光面包房 · 门店页</h3>
+            <p>暖色调、能下单、能导航，本地实体店最需要的那种"能用的门面"。</p>
+            <ul class="sample-feats">
+              <li>"营业中 / 已打烊"按本机时间实时算</li>
+              <li>菜单分咖啡 / 面包 / 轻食切换</li>
+              <li>营业时间表自动标出今天</li>
+            </ul>
+            <span class="sample-open">点开看完整页面 ↗</span>
+          </div>
+        </a>
+      </div>
+
+      <p class="sample-note" data-reveal>样片里的社团、店铺、人名与地址都是虚构的，只用来演示版式和交互，不代表真实客户。三个样片都是单文件 HTML，加起来不到 100KB，不依赖任何外部图片或字体服务。</p>
+    </div>
+  </section>
+
+  <!-- ASSETS -->
+  <section id="assets" class="assets">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Assets · 视觉素材</p>
+        <h2>品牌素材：矢量标记 + 分享卡</h2>
+        <p>logo 与社交分享卡都已产出并接入页面：透明矢量标记、16/32/180px 图标、1200×630 分享封面，全部本地文件、零外链、无水印。</p>
+      </div>
+
+      <div class="assets-grid stagger">
+        <div class="asset-card" data-reveal style="--d:0">
+          <div class="mark-showcase">
+            <img src="assets/logo-mark-512.png" alt="页工坊品牌标记：纸张、工字与印章红方块">
+            <div>
+              <h3>品牌标记</h3>
+              <p>两张纸 + 工字 + 印章红方块。在 16px 下仍能看出"深色方块 + 纸页 + 红点"的轮廓。</p>
+            </div>
+          </div>
+          <div class="favicon-row">
+            <figure><img src="assets/favicon-32.png" width="32" height="32" alt=""><figcaption>32 px</figcaption></figure>
+            <figure><img src="assets/favicon-16.png" width="16" height="16" alt=""><figcaption>16 px</figcaption></figure>
+            <figure><img src="assets/apple-touch-icon-180.png" width="56" height="56" alt=""><figcaption>180 px</figcaption></figure>
+          </div>
+          <p class="asset-files">assets/brand-mark.svg · logo-mark-512.png · favicon-16.png · favicon-32.png · apple-touch-icon-180.png</p>
+        </div>
+
+        <figure class="og-preview" data-reveal style="--d:1">
+          <img src="assets/og-cover.png" alt="页工坊社交分享卡：把需求，做成能打开的页面。">
+          <figcaption>社交分享卡 1200×630（assets/og-cover.png）。标题、纸堆、浏览器窗口、色卡与印章全部由 HTML/CSS/SVG 排版产出，中文不会出现生成模型的乱码。</figcaption>
+        </figure>
+      </div>
+
+      <p class="asset-note" data-reveal><b>关于 AI 生图：</b>本轮按 image-logo-icons 的模板写好了结构化提示词，并实际调用了生成通道，但可用通道全部不合格：OpenAI 接口在当前网络不可达（机场订阅已于 2026-09-05 到期），阿里云百炼账号欠费，智谱免费与付费模型输出都强制带"AI生成"水印，还会把画面写满乱码字母、构图与要求相反。累计 6 张试稿全部淘汰，未进入交付。正式素材因此改为代码原生产出；下方提示词已保留，等你续上代理或配好无水印生图通道，可以直接替换封面插画。</p>
+
+      <details class="prompt-box" data-reveal>
+        <summary>查看 image-logo-icons 结构化提示词（已用于实际调用）</summary>
+        <pre>【品牌标记 / site_logo】
+Use case: logo-brand
+Asset type: brand mark for a student web-design studio (nav 34px + favicon source)
+Primary request: flat geometric mark of two offset page sheets forming a subtle 工-like binding notch, one folded corner, a seal-red stamp square and two thin crop marks
+Scene/backdrop: one perfectly uniform chroma-key green (#00FF00) edge to edge
+Style/medium: flat vector-style, screen-printed look, geometric, precise, minimal
+Composition: centered 1:1, symbol about 60% of canvas, generous clear space
+Color palette: ink #1C2320, seal red #CE4A32, paper #F3F4EC on the green key
+Text (verbatim): none
+Constraints: NO text, letters, numbers, watermark; background must stay perfectly flat #00FF00 with no shadow, glow, gradient or texture
+
+【分享封面 / social_og_image】
+Use case: ads-marketing
+Asset type: Open Graph cover base art (headline text added later in a layout tool)
+Primary request: print-shop still life reimagined for web design — paper job tickets, a swatch strip, registration marks, a paper-cut browser window, a red stamp block
+Composition/framing: wide ~1.9:1; objects clustered in the right 55%; left 40% calm empty space for headline text
+Style/medium: flat vector-editorial with subtle screen-print grain; geometric, restrained
+Color palette: paper #F3F4EC, ink #1C2320, seal red #CE4A32, muted sage #C9CDBE
+Text (verbatim): none
+Constraints: absolutely NO text, letters, numbers, logos, watermarks; no photorealism, gradient mesh or neon</pre>
+      </details>
+    </div>
+  </section>
+
+  <!-- TOOLBOX -->
+  <section id="toolbox" class="toolbox">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Toolbox · 已装技能盘点</p>
+        <h2>一张表看懂工具箱分工</h2>
+        <p>这批网页设计与生成 skill 于 2026-08-13 成批安装，各管一段：从定视觉方向，到实现页面、生成素材、评审改稿。</p>
+      </div>
+      <div class="tool-list" data-reveal>
+        <div class="tool-row">
+          <div class="tool-name"><strong>视觉方向</strong><em>frontend-design</em></div>
+          <p class="desc">定配色、字体、版式与一处「记忆点」，避免模板脸和 AI 味。所有新页面从这里起步。</p>
+          <div class="tool-use">DESIGN</div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-name"><strong>产品 UI 系统</strong><em>ui-ux-design-system</em></div>
+          <p class="desc">中性、克制、系统化的产品界面规范：层级、间距、深浅主题、组件状态。</p>
+          <div class="tool-use">SYSTEM</div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-name"><strong>排版优先工作流</strong><em>saas-ui-ux-designer-typography</em></div>
+          <p class="desc">字号、行距、栅格先行；先排版再装饰，适合后台、编辑器这类信息密集页。</p>
+          <div class="tool-use">TYPE</div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-name"><strong>全系统 SaaS 设计</strong><em>saas-ui-ux-designer-with-flex</em></div>
+          <p class="desc">决定 Flex 还是 Grid、页面骨架怎么搭，含完整参考规范与可复用 token。</p>
+          <div class="tool-use">LAYOUT</div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-name"><strong>SaaS 产品界面统一入口</strong><em>saas-product-ui-system</em></div>
+          <p class="desc">把上面几个整合成一套工作流：表面分类 → 密度 → 结构 → 组件 → 状态。</p>
+          <div class="tool-use">PRODUCT</div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-name"><strong>复杂组件原型</strong><em>web-artifacts-builder</em></div>
+          <p class="desc">React + TypeScript + Tailwind + shadcn/ui，支持多组件、有交互状态的页面，可打包成单 HTML。</p>
+          <div class="tool-use">COMPONENT</div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-name"><strong>品牌图提示词</strong><em>image-logo-icons</em></div>
+          <p class="desc">Logo、UI 图标、favicon、社交封面、博客头图的结构化生成模板。</p>
+          <div class="tool-use">IMAGE</div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-name"><strong>位图素材生成</strong><em>imagegen</em></div>
+          <p class="desc">需要插画、纹理、概念图或透明背景素材时，生成或编辑位图资产。</p>
+          <div class="tool-use">RASTER</div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-name"><strong>设计评审</strong><em>review-ui-design</em></div>
+          <p class="desc">视觉 / 交互 / 设计系统 / 无障碍四视角去重评审，出问题标注图和优化建议图，支持复评。</p>
+          <div class="tool-use">QA</div>
+        </div>
+      </div>
+      <p class="toolbox-note" data-reveal>* 本页即由 frontend-design 定方向、手写 HTML/CSS 实现，未引入任何外部字体与图片库。</p>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" class="process">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Process · 怎么做</p>
+        <h2>四个步骤，把单子走完</h2>
+        <p>顺序本身有意义：范围写清在前，报价锁死在中，验收标准不靠口头。</p>
+      </div>
+      <div class="steps stagger">
+        <div class="step" data-reveal style="--d:0">
+          <h3>填需求工单</h3>
+          <p><b>页面类型、给谁看、参考页、预算、工期、修改轮数</b>一次写进单子。范围不清不报价。</p>
+        </div>
+        <div class="step" data-reveal style="--d:1">
+          <h3>出设计方向</h3>
+          <p>给出配色、字体、版式和一处记忆点。<b>先看方向、双方点头，再开始写代码</b>，避免返工。</p>
+        </div>
+        <div class="step" data-reveal style="--d:2">
+          <h3>做成页面</h3>
+          <p>放真实内容、响应式适配、键盘可操作；图标配图一起补齐，交付前本地逐屏预览。</p>
+        </div>
+        <div class="step" data-reveal style="--d:3">
+          <h3>质检交付</h3>
+          <p>自查层级、状态、动效与移动端后交你验收，附一页「怎么改、怎么上线」的说明。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT UI DEMO -->
+  <section id="product-ui" class="product-ui">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Saas UI · 产品界面演示</p>
+        <h2>同一页里，切进一个"后台系统"</h2>
+        <p>这块按 saas-product-ui-system 的 dashboard 蓝图实现：页头 + 主行动 → KPI 行 → 趋势面板 → 报名表格。token 直接取自该 skill 的 design-tokens.css。</p>
+      </div>
+
+      <div class="demo-app" data-reveal>
+        <div class="demo-topbar">
+          <div class="demo-brand"><span class="mark">页</span>社团后台</div>
+          <span class="crumb"><i>招新看板</i> / 2026 秋季</span>
+        </div>
+        <div class="demo-page">
+          <div class="demo-title-row">
+            <div>
+              <h3>招新数据</h3>
+              <p>报名、联系、录取全流程一屏掌握</p>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="ds-btn ghost" type="button" id="dsEmptyToggle" aria-pressed="false">演示空状态</button>
+              <button class="ds-btn" type="button">导出名单</button>
+            </div>
+          </div>
+
+          <div class="demo-kpis">
+            <div class="ds-kpi"><span>本周报名</span><b>128 <small>+12%</small></b><div class="sub">对比上周</div></div>
+            <div class="ds-kpi"><span>待联系</span><b>23</b><div class="sub">今天要回 9 人</div></div>
+            <div class="ds-kpi"><span>已通过</span><b>61</b><div class="sub">通过率 47.7%</div></div>
+            <div class="ds-kpi"><span>已录取</span><b>9</b><div class="sub">还有 3 个名额</div></div>
+          </div>
+
+          <div class="demo-layout">
+            <div class="ds-panel">
+              <div class="ds-panel-head"><h4>报名趋势</h4><span>9/2–9/8 · 日新增</span></div>
+              <div class="ds-chart" role="img" aria-label="本周报名趋势：周二最高 52 人">
+                <div class="ds-bar-col"><div class="ds-track"><i style="--h:42%"></i></div><span>周一</span><b>22</b></div>
+                <div class="ds-bar-col"><div class="ds-track"><i style="--h:100%"></i></div><span>周二</span><b>52</b></div>
+                <div class="ds-bar-col"><div class="ds-track"><i style="--h:56%"></i></div><span>周三</span><b>29</b></div>
+                <div class="ds-bar-col"><div class="ds-track"><i style="--h:34%"></i></div><span>周四</span><b>18</b></div>
+                <div class="ds-bar-col"><div class="ds-track"><i style="--h:26%"></i></div><span>周五</span><b>14</b></div>
+                <div class="ds-bar-col"><div class="ds-track"><i style="--h:32%"></i></div><span>周六</span><b>17</b></div>
+                <div class="ds-bar-col"><div class="ds-track"><i style="--h:12%"></i></div><span>周日</span><b>6</b></div>
+              </div>
+            </div>
+            <div class="ds-panel">
+              <div class="ds-panel-head"><h4>今日待办</h4><span>3 项</span></div>
+              <ul class="ds-todo">
+                <li><span class="dot new"></span><div><b>联系扫码报名但没填表的人</b><span>名单已按宿舍楼分组</span></div><time>10:30</time></li>
+                <li><span class="dot"></span><div><b>确认外联部赞助方案初稿</b><span>对方想看页面 Demo</span></div><time>14:00</time></li>
+                <li><span class="dot ok"></span><div><b>发布第二轮面试通知</b><span>已录取 9 人全部触达</span></div><time>完成</time></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="ds-panel demo-table-card">
+            <div class="ds-panel-head">
+              <h4>报名列表</h4>
+              <div class="ds-filter" id="dsFilter" role="group" aria-label="按状态筛选">
+                <button class="ds-tab" type="button" data-filter="all" aria-pressed="true">全部 4</button>
+                <button class="ds-tab" type="button" data-filter="new" aria-pressed="false">新报名 2</button>
+                <button class="ds-tab" type="button" data-filter="contacted" aria-pressed="false">已联系 1</button>
+                <button class="ds-tab" type="button" data-filter="admitted" aria-pressed="false">已录取 1</button>
+              </div>
+            </div>
+            <div class="ds-table-wrap">
+              <table class="ds-table">
+                <thead>
+                  <tr>
+                    <th>姓名</th>
+                    <th>意向部门</th>
+                    <th>状态</th>
+                    <th>来源</th>
+                  </tr>
+                </thead>
+                <tbody id="dsRows">
+                  <tr data-status="new"><td>陈小满</td><td>宣传部</td><td><span class="ds-badge new">新报名</span></td><td>扫码</td></tr>
+                  <tr data-status="contacted"><td>李一帆</td><td>外联部</td><td><span class="ds-badge wait">已联系</span></td><td>招新表单</td></tr>
+                  <tr data-status="new"><td>周珂</td><td>活动部</td><td><span class="ds-badge new">新报名</span></td><td>摊位登记</td></tr>
+                  <tr data-status="admitted"><td>王思远</td><td>技术部</td><td><span class="ds-badge ok">已录取</span></td><td>学长转介绍</td></tr>
+                  <tr id="dsEmptyRow" hidden><td colspan="4" class="ds-cell-empty">没有符合条件的结果。建议重置筛选，或先联系新报名同学。</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="demo-caption" data-reveal>* 本区由 <b>saas-product-ui-system</b> 定结构、<b>ui-ux-design-system</b> 约束层级、<b>saas-ui-ux-designer-with-flex / -typography</b> 决定栅格与排版。KPI 行可换行、表格内部可横向滚动、空状态可点出来看。</p>
+    </div>
+  </section>
+
+  <!-- PROTOTYPE -->
+  <section id="prototype" class="prototype">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Web Artifacts · React 原型演示</p>
+        <h2>把"报价逻辑"做成能点的原型</h2>
+        <p>下面是一个可操作的报价计算器：由 web-artifacts-builder 的 React 18 + TypeScript + Tailwind + shadcn/ui 工程打包成单 HTML，选择、按钮、复制都有真实反馈。</p>
+      </div>
+
+      <div class="proto-stage" data-reveal>
+        <iframe src="prototype-quote.html" title="页工坊页面报价交互原型" loading="lazy"></iframe>
+      </div>
+
+      <div class="proto-note" data-reveal>
+        <p>原型独立成一个文件，方便单独发给客户"先点一下再谈价"。打包流程：Vite 构建 → html-inline 内联，产物零外部依赖。</p>
+        <a class="btn btn-ghost" href="prototype-quote.html" target="_blank" rel="noopener">新窗口打开原型 ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEW -->
+  <section id="review" class="review">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Review UI · 质检记录</p>
+        <h2>用 review-ui-design 给本页走查</h2>
+        <p>本轮按视觉质量、交互体验、设计系统三个视角检查。发现 1 个真实对比度问题（P1），已修复；完整报告单独成文件。</p>
+      </div>
+
+      <div class="review-summary" data-reveal>
+        <h3>结论：无 P0 遗留；P1 × 1（已修复）；P2 × 2（已记录待确认）</h3>
+        <p>修复项：导航 CTA 与页眉小字原用 #CE4A32 系强调色，白字/红底对比仅 4.27:1、红字/纸底 4.08:1，不达 AA。现改为墨色按钮 + #A93624 强调文字，复测分别 14.99:1 与 5.85:1。另：6 张 AI 生图试稿因水印 / 乱码 / 构图不符全部淘汰，改用代码原生素材。</p>
+      </div>
+
+      <div class="review-list" data-reveal>
+        <div class="review-row"><strong>无障碍 · 对比</strong><span><code>scripts/contrast.py</code> 复核正文 #5C645D/#F3F4EC = 5.52:1 PASS；强调文字 #A93624/#F3F4EC = 5.85:1 PASS；深色区 #B9C0B3/#1E2521 = 8.39:1 PASS</span></div>
+        <div class="review-row"><strong>交互 · 状态</strong><span>Playwright 实测原型：切换页面类型、附加项、修改轮数后报价区间即时更新；复制按钮出现"已复制需求单"；无 JS 报错</span></div>
+        <div class="review-row"><strong>素材 · 真实性</strong><span>6 张生成试稿逐张目检：智谱免费/付费模型均强制带"AI生成"水印，纸张上出现乱码字母且构图与要求相反；全部淘汰，交付改用本地 SVG / HTML 排版素材</span></div>
+        <div class="review-row"><strong>构 · 响应式</strong><span>390px 视口下整页 <code>scrollWidth = 390</code>，无横向溢出；产品表格在窄屏内独立横向滚动</span></div>
+        <div class="review-row"><strong>系统 · 状态覆盖</strong><span>产品演示含空状态开关与语义徽标（点 + 文字，不只靠颜色）；原型覆盖按下/选中/复制反馈</span></div>
+        <div class="review-row"><strong>待确认</strong><span>系统 200% 文字放大、真实读屏朗读、色弱模拟、不同中文渲染字体下的行高——需要真实设备复核</span></div>
+      </div>
+
+      <div class="review-figs" data-reveal>
+        <figure>
+          <img src="review-v1-status.png" alt="V1 状态标注图：导航 CTA 已修复为墨底按钮">
+          <figcaption>V1 状态标注图 · 已修复：CTA 对比度 4.27:1 → 14.99:1</figcaption>
+        </figure>
+        <figure>
+          <img src="review-v2-status.png" alt="V2 状态标注图：6 张生成式试稿淘汰，改用矢量素材">
+          <figcaption>V2 状态标注图 · 已替换：生成试稿淘汰 → 矢量标记 + 排版封面</figcaption>
+        </figure>
+      </div>
+      <p class="review-note" data-reveal>* 标注图用 DOM 叠加中文编号与说明，页面像素与布局不变，避免生成式标注出现乱码。未生成"优化建议图"：两条问题都已修复或以素材替换解决，没有新的视觉方向需要示意。</p>
+      <div class="review-actions" data-reveal>
+        <a class="btn btn-primary" href="web-design-review-2026-09-09.md" target="_blank" rel="noopener">查看完整评审报告</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REALITY CHECK -->
+  <section id="reality" class="reality">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">FAQ · 先说实话</p>
+        <h2>大学生做网页，能赚钱吗？</h2>
+        <p>下面的回答是行情参考，不是收入承诺。它写给打算开始的人，也写给已经想放弃的人。</p>
+      </div>
+
+      <div class="answer" data-reveal>
+        <p class="big">能，但这是门<span>「交付生意」</span>——买家付钱买的不是「会做网页」，是「按时、按说好的标准、能验收」地交出页面。</p>
+        <p>网上那些「大学生做网页月入过万」，绝大多数是营销口径。现实里，单子要自己找、口碑要一单单攒；而工具箱能帮你把每单的质量和速度提上去。</p>
+      </div>
+
+      <div class="earn-grid" data-reveal>
+        <article class="earn-card">
+          <h3>01 · 谁在买</h3>
+          <ul>
+            <li>校内：社团、学生会、老师与实验室</li>
+            <li>本地：小店、工作室、培训班门面</li>
+            <li>线上：闲鱼、B 站工房、小红书私信</li>
+            <li>转介绍：同学、家长、实习单位</li>
+          </ul>
+        </article>
+        <article class="earn-card">
+          <h3>02 · 行情参考</h3>
+          <div class="price-list">
+            简单单页落地 &nbsp;<b>¥100–300</b><br>
+            个人站 / 作品集 &nbsp;<b>¥300–800</b><br>
+            后台 / 工具型原型 &nbsp;<b>¥800–2000+</b><br>
+            小程序 / 定制 &nbsp;<b>另议</b>
+          </div>
+        </article>
+        <article class="earn-card">
+          <h3>03 · 接单底线</h3>
+          <ul>
+            <li>先收定金或先款，范围写进单子</li>
+            <li>修改轮数写明，超出另计</li>
+            <li>字体与素材版权问清来源</li>
+            <li>AI 辅助做的页面，自己要讲得清、改得动</li>
+            <li>不接代写作业、代考等灰色单</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="start-path" data-reveal>
+        <div class="path-item"><b>先做 3 个样片</b>招新页、作品集、小店页各一，比任何自我介绍都管用。</div>
+        <div class="path-item"><b>报价写区间</b>先问预算再给区间，最后锁死总价，不搞「看着看着就加钱」。</div>
+        <div class="path-item"><b>第一单换口碑</b>前两单可以平价换真实案例与好评，但底线条款一条不少。</div>
+      </div>
+
+      <p class="disclaimer" data-reveal>注：以上价位基于 2026 年闲鱼 / 工房等平台常见挂价整理，市场会变；真实成交以当面谈单为准。展示页里的联系方式和价格请按本人情况替换后再对外使用。</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Contact · 联系方式</p>
+        <h2>要做一个页面？</h2>
+        <p>先说清楚三件事就够了：给谁看、什么时候要、大概什么预算。剩下的我来问。</p>
+      </div>
+
+      <div class="contact-card" data-reveal>
+        <div>
+          <h3>怎么找到我</h3>
+          <p class="contact-lede">校内单、本地店、线上私信都可以。先聊需求再报价；不合适的单子我会直说，不会为了接单硬做。</p>
+          <ul class="contact-ways">
+            <li>
+              <span class="cw-k">微信</span>
+              <span class="cw-v todo">待填写 · 把你的微信号写在这儿
+                <span class="cw-note">对外发布前必须替换，否则别人找不到你</span>
+              </span>
+            </li>
+            <li>
+              <span class="cw-k">邮箱</span>
+              <span class="cw-v todo">待填写 · your@email.com</span>
+            </li>
+            <li>
+              <span class="cw-k">响应</span>
+              <span class="cw-v">通常 24 小时内回复<span class="cw-note">考试周可能慢半天</span></span>
+            </li>
+            <li>
+              <span class="cw-k">服务</span>
+              <span class="cw-v">单页落地 · 作品集 · 门店页 · 后台原型</span>
+            </li>
+          </ul>
+        </div>
+        <div class="contact-side">
+          <div class="qr-slot">把这里换成<br>你的微信二维码</div>
+          <p class="qr-hint">替换方法：二维码图存成 assets/wechat-qr.png，再把上面的方块换成一段 img 标签。</p>
+          <a class="btn btn-primary" href="#samples">先看样片</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">页工坊<small>PAGE·WORKS · 学生网页工单</small></div>
+      <p>由 Codex 依据本机已装的网页设计技能生成：主站单文件、三份样片单文件、React 原型独立打包，全部零外链。对外使用前，把联系方式换成你自己的。</p>
+    </div>
+    <p class="foot-note">© 2026 页工坊 · 零外链 · 适配手机 · 键盘可达 · 样片内容均为虚构演示</p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    const revealEls = document.querySelectorAll('[data-reveal]');
+    if (!('IntersectionObserver' in window)) {
+      revealEls.forEach(function(el){ el.classList.add('is-in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.04, rootMargin: '0px 0px -2% 0px' });
+    revealEls.forEach(function(el){ io.observe(el); });
+    function revealAll() {
+      revealEls.forEach(function(el){ el.classList.add('is-in'); });
+    }
+    window.setTimeout(revealAll, 1200);
+    window.addEventListener('beforeprint', revealAll);
+
+    // Product-demo interactions: filter tabs + empty-state demo
+    var dsRows = Array.prototype.slice.call(document.querySelectorAll('#dsRows tr[data-status]'));
+    var dsEmptyRow = document.getElementById('dsEmptyRow');
+    var dsEmptyToggle = document.getElementById('dsEmptyToggle');
+    var dsTabs = Array.prototype.slice.call(document.querySelectorAll('#dsFilter .ds-tab'));
+    var currentFilter = 'all';
+    var emptyMode = false;
+
+    function syncEmptyToggle() {
+      if (!dsEmptyToggle) return;
+      dsEmptyToggle.textContent = emptyMode ? '恢复数据' : '演示空状态';
+      dsEmptyToggle.setAttribute('aria-pressed', String(emptyMode));
+    }
+
+    function applyDsState() {
+      if (!dsRows.length || !dsEmptyRow) return;
+      if (emptyMode) {
+        dsRows.forEach(function (row) { row.hidden = true; });
+        dsEmptyRow.hidden = false;
+        return;
+      }
+      var visible = 0;
+      dsRows.forEach(function (row) {
+        var show = currentFilter === 'all' || row.getAttribute('data-status') === currentFilter;
+        row.hidden = !show;
+        if (show) visible += 1;
+      });
+      dsEmptyRow.hidden = visible > 0;
+    }
+
+    dsTabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        emptyMode = false;
+        currentFilter = tab.getAttribute('data-filter') || 'all';
+        dsTabs.forEach(function (t) {
+          t.setAttribute('aria-pressed', String(t === tab));
+        });
+        syncEmptyToggle();
+        applyDsState();
+      });
+    });
+
+    if (dsEmptyToggle) {
+      dsEmptyToggle.addEventListener('click', function () {
+        emptyMode = !emptyMode;
+        syncEmptyToggle();
+        applyDsState();
+      });
+    }
+
+    // Sample previews: scale each 1400px-wide iframe down to fit its card
+    var sampleShots = Array.prototype.slice.call(document.querySelectorAll('.sample-shot'));
+    function fitSamples() {
+      sampleShots.forEach(function (box) {
+        var f = box.querySelector('iframe');
+        if (!f) return;
+        var w = box.clientWidth, h = box.clientHeight;
+        if (w > 0 && h > 0) {
+          var s = w / 1400;
+          f.style.transform = 'scale(' + s + ')';
+          f.style.height = Math.ceil(h / s) + 'px';
+        }
+      });
+    }
+    fitSamples();
+    window.addEventListener('load', fitSamples);
+    window.addEventListener('resize', fitSamples);
+    window.setTimeout(fitSamples, 600);
+  })();
+</script>
+</body>
+</html>

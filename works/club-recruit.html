@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>星野天文社 · 2026 秋季招新</title>
+<meta name="description" content="星野天文社 2026 秋季招新：观测、摄影、科普三条线，10 月 15 日截止报名。">
+<meta name="theme-color" content="#0B1020">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon-180.png">
+<style>
+:root{
+  --night:#080C1A;
+  --night-2:#0F1730;
+  --panel:rgba(255,255,255,.045);
+  --panel-line:rgba(255,255,255,.11);
+  --star:#EDF1FF;
+  --soft:#9AA7C9;
+  --faint:#6B7899;
+  --amber:#F2B33D;
+  --amber-deep:#D3931C;
+  --cyan:#6FD3E0;
+  --ok:#5BD98A;
+  --sans:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC","Source Han Sans SC",system-ui,sans-serif;
+  --mono:Consolas,"SF Mono",Menlo,"Cascadia Mono",monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--night);color:var(--star);
+  font-family:var(--sans);font-size:16px;line-height:1.75;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+::selection{background:var(--amber);color:#0B1020}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:3px}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+.sample-badge{
+  position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:60;
+  display:flex;align-items:center;gap:8px;
+  background:rgba(8,12,26,.86);backdrop-filter:blur(10px);
+  border:1px solid var(--panel-line);border-radius:999px;
+  padding:7px 15px;font-size:12px;color:var(--soft);text-decoration:none;
+  font-family:var(--mono);letter-spacing:.04em;
+  box-shadow:0 10px 30px -12px rgba(0,0,0,.8);
+}
+.sample-badge b{color:var(--amber);font-weight:700}
+.sample-badge:hover{border-color:var(--amber);color:var(--star)}
+
+header.site{position:sticky;top:0;z-index:40;transition:background .3s ease,border-color .3s ease;border-bottom:1px solid transparent}
+header.site.solid{background:rgba(8,12,26,.86);backdrop-filter:blur(12px);border-bottom-color:var(--panel-line)}
+nav.bar{display:flex;align-items:center;justify-content:space-between;gap:20px;height:66px}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.logo svg{display:block;flex:none}
+.logo b{font-size:16px;font-weight:700;letter-spacing:.04em}
+.logo small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--faint);font-weight:400}
+.navlinks{display:flex;align-items:center;gap:2px}
+.navlinks a{
+  color:var(--soft);text-decoration:none;font-size:14px;font-weight:600;
+  padding:8px 13px;border-radius:5px;transition:color .16s ease,background .16s ease;
+}
+.navlinks a:hover{color:var(--star);background:var(--panel)}
+.navlinks a.apply{background:var(--amber);color:#14100A;margin-left:10px}
+.navlinks a.apply:hover{background:#FFC85C}
+
+.hero{position:relative;padding:96px 0 84px;overflow:hidden}
+.sky{position:absolute;inset:0;pointer-events:none;z-index:0}
+.sky i{position:absolute;background:#fff;border-radius:50%;animation:tw 4.5s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.25}50%{opacity:1}}
+.glow{
+  position:absolute;z-index:0;pointer-events:none;
+  width:900px;height:620px;right:-220px;top:-200px;
+  background:radial-gradient(closest-side,rgba(111,211,224,.20),transparent 72%);
+}
+.glow.two{left:-260px;right:auto;top:180px;width:760px;height:560px;
+  background:radial-gradient(closest-side,rgba(242,179,61,.15),transparent 72%)}
+.hero .wrap{position:relative;z-index:1}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center}
+.kicker{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--cyan);border:1px solid rgba(111,211,224,.35);
+  background:rgba(111,211,224,.08);border-radius:999px;padding:5px 13px;margin-bottom:22px;
+}
+.kicker .dot{width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(91,217,138,.18)}
+h1{font-size:clamp(34px,5.2vw,60px);line-height:1.16;letter-spacing:-.02em;margin:0 0 20px;font-weight:800}
+h1 em{font-style:normal;color:var(--amber)}
+.lead{color:var(--soft);font-size:17px;max-width:30em;margin:0 0 32px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:26px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:15px;font-weight:700;text-decoration:none;
+  padding:13px 26px;border-radius:6px;border:1px solid transparent;
+  transition:transform .14s ease,background .16s ease,border-color .16s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--amber);color:#14100A}
+.btn-primary:hover{background:#FFC85C}
+.btn-ghost{border-color:var(--panel-line);color:var(--star);background:var(--panel)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.28)}
+
+.count-card{
+  background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.025));
+  border:1px solid var(--panel-line);border-radius:14px;padding:26px;
+  backdrop-filter:blur(6px);box-shadow:0 30px 70px -40px rgba(0,0,0,.95);
+}
+.count-card .label{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--faint);text-transform:uppercase}
+.count-card h2{font-size:19px;margin:10px 0 4px;font-weight:700}
+.count-card .sub{color:var(--faint);font-size:13px;margin:0 0 20px}
+.count{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.count div{
+  background:rgba(0,0,0,.32);border:1px solid var(--panel-line);
+  border-radius:9px;padding:12px 6px;text-align:center;
+}
+.count b{display:block;font-family:var(--mono);font-size:26px;line-height:1.1;color:var(--amber);font-variant-numeric:tabular-nums}
+.count span{font-size:11px;color:var(--faint);letter-spacing:.06em}
+.planets{display:flex;align-items:center;gap:14px;margin-top:20px;padding-top:18px;border-top:1px solid var(--panel-line)}
+.orb{width:40px;height:40px;border-radius:50%;flex:none;
+  background:radial-gradient(circle at 32% 30%,#F7D98A,#D3931C 58%,#7A5310);
+  box-shadow:0 0 26px -4px rgba(242,179,61,.55)}
+.planets p{margin:0;font-size:13px;color:var(--soft)}
+.planets p b{color:var(--star)}
+
+.stats{border-top:1px solid var(--panel-line);border-bottom:1px solid var(--panel-line);background:rgba(255,255,255,.02)}
+.stats-in{display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
+.stat{padding:32px 22px;text-align:center;border-right:1px solid var(--panel-line)}
+.stat:last-child{border-right:0}
+.stat b{display:block;font-family:var(--mono);font-size:34px;font-weight:700;color:var(--star);line-height:1.15}
+.stat span{font-size:13px;color:var(--faint)}
+
+section{padding:96px 0}
+.sec-head{max-width:660px;margin-bottom:52px}
+.eyebrow{
+  display:flex;align-items:center;gap:10px;font-family:var(--mono);
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--cyan);margin:0 0 14px;font-weight:700;
+}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--cyan)}
+.sec-head h2{font-size:clamp(26px,3.6vw,38px);line-height:1.28;margin:0 0 14px;font-weight:800;letter-spacing:-.01em}
+.sec-head p{color:var(--soft);margin:0}
+
+.tracks{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.track{
+  background:var(--panel);border:1px solid var(--panel-line);border-radius:12px;
+  padding:28px;transition:transform .2s ease,border-color .2s ease,background .2s ease;
+}
+.track:hover{transform:translateY(-4px);border-color:rgba(242,179,61,.42);background:rgba(255,255,255,.07)}
+.track svg{display:block;margin-bottom:18px}
+.track h3{font-size:18px;margin:0 0 10px;font-weight:700}
+.track p{color:var(--soft);font-size:14.5px;margin:0 0 16px}
+.tagrow{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:11px;color:var(--cyan);
+  border:1px solid rgba(111,211,224,.3);border-radius:4px;padding:3px 8px}
+
+.dept{display:grid;gap:1px;background:var(--panel-line);border:1px solid var(--panel-line);border-radius:12px;overflow:hidden}
+.dept-row{
+  display:grid;grid-template-columns:52px 150px 1fr auto;gap:20px;align-items:center;
+  background:var(--night);padding:20px 24px;transition:background .18s ease;
+}
+.dept-row:hover{background:var(--night-2)}
+.dept-row .no{font-family:var(--mono);font-size:13px;color:var(--faint)}
+.dept-row h3{margin:0;font-size:16px;font-weight:700}
+.dept-row p{margin:0;color:var(--soft);font-size:14px}
+.quota{font-family:var(--mono);font-size:12px;color:var(--amber);white-space:nowrap;
+  border:1px solid rgba(242,179,61,.35);border-radius:999px;padding:4px 12px}
+
+.sched{display:grid;gap:12px}
+.ev{
+  display:grid;grid-template-columns:112px 1fr auto;gap:20px;align-items:center;
+  background:var(--panel);border:1px solid var(--panel-line);border-left:3px solid var(--cyan);
+  border-radius:0 10px 10px 0;padding:18px 22px;
+}
+.ev time{font-family:var(--mono);font-size:13px;color:var(--cyan)}
+.ev h3{margin:0;font-size:16px;font-weight:700}
+.ev p{margin:4px 0 0;color:var(--faint);font-size:13.5px}
+.ev .seat{font-size:12px;color:var(--soft);font-family:var(--mono);white-space:nowrap}
+
+.apply-sec{background:linear-gradient(180deg,transparent,rgba(242,179,61,.05) 40%,transparent)}
+.apply-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+.apply-copy h2{font-size:clamp(26px,3.6vw,36px);margin:0 0 16px;font-weight:800;line-height:1.3}
+.apply-copy p{color:var(--soft);margin:0 0 22px}
+.checklist{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.checklist li{display:flex;gap:11px;align-items:flex-start;color:var(--soft);font-size:14.5px}
+.checklist li svg{flex:none;margin-top:5px}
+form{
+  background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.025));
+  border:1px solid var(--panel-line);border-radius:14px;padding:30px;
+}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:13.5px;font-weight:700;margin-bottom:7px}
+.field label span{color:var(--amber)}
+.field input,.field select,.field textarea{
+  width:100%;background:rgba(0,0,0,.34);border:1px solid var(--panel-line);
+  border-radius:7px;color:var(--star);font-family:var(--sans);font-size:15px;
+  padding:11px 13px;transition:border-color .16s ease,box-shadow .16s ease;
+}
+.field textarea{resize:vertical;min-height:88px}
+.field input::placeholder,.field textarea::placeholder{color:var(--faint)}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:var(--amber);box-shadow:0 0 0 3px rgba(242,179,61,.16);
+}
+.field select option{background:var(--night-2);color:var(--star)}
+.field .err{display:none;color:#FF8A7A;font-size:12.5px;margin-top:6px}
+.field.invalid input,.field.invalid select{border-color:#FF8A7A}
+.field.invalid .err{display:block}
+.radios{display:flex;flex-wrap:wrap;gap:8px}
+.radios label{
+  display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+  border:1px solid var(--panel-line);border-radius:999px;padding:7px 15px;
+  font-size:13.5px;font-weight:600;color:var(--soft);transition:all .16s ease;margin:0;
+}
+.radios input{position:absolute;opacity:0;width:0;height:0}
+.radios label:hover{border-color:rgba(255,255,255,.3);color:var(--star)}
+.radios label:has(input:checked){background:rgba(242,179,61,.16);border-color:var(--amber);color:var(--amber)}
+.submit{
+  width:100%;background:var(--amber);color:#14100A;border:0;border-radius:7px;
+  font-family:var(--sans);font-size:16px;font-weight:800;padding:15px;cursor:pointer;
+  transition:background .16s ease;
+}
+.submit:hover{background:#FFC85C}
+.form-note{text-align:center;color:var(--faint);font-size:12.5px;margin:14px 0 0}
+.success{display:none;text-align:center;padding:30px 10px}
+.success.on{display:block}
+.success svg{margin:0 auto 16px;display:block}
+.success h3{font-size:20px;margin:0 0 8px}
+.success p{color:var(--soft);margin:0 0 18px;font-size:14.5px}
+.success button{
+  background:transparent;border:1px solid var(--panel-line);color:var(--soft);
+  border-radius:6px;padding:9px 20px;font-family:var(--sans);font-size:14px;cursor:pointer;
+}
+.success button:hover{border-color:var(--amber);color:var(--amber)}
+
+.faq{display:grid;gap:10px;max-width:820px}
+details{
+  background:var(--panel);border:1px solid var(--panel-line);border-radius:10px;
+  padding:0 22px;transition:border-color .18s ease;
+}
+details[open]{border-color:rgba(242,179,61,.35)}
+summary{
+  cursor:pointer;list-style:none;padding:18px 0;font-weight:700;font-size:15.5px;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);color:var(--amber);font-size:20px;line-height:1;flex:none}
+details[open] summary::after{content:"-"}
+details p{margin:0 0 20px;color:var(--soft);font-size:14.5px}
+
+footer{border-top:1px solid var(--panel-line);padding:56px 0 96px;background:rgba(0,0,0,.25)}
+.foot-grid{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
+.foot-grid h3{margin:0 0 8px;font-size:18px}
+.foot-grid p{margin:0;color:var(--faint);font-size:14px;max-width:34em}
+.qr{
+  width:104px;height:104px;border-radius:10px;background:#fff;padding:8px;
+  display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(7,1fr);gap:2px;
+}
+.qr i{background:#0B1020;border-radius:1px}
+.qr i.off{background:transparent}
+.foot-note{margin-top:40px;padding-top:24px;border-top:1px solid var(--panel-line);
+  font-family:var(--mono);font-size:11.5px;color:var(--faint);letter-spacing:.05em}
+
+[data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+[data-reveal].is-in{opacity:1;transform:none}
+
+@media(max-width:960px){
+  .hero-grid{grid-template-columns:1fr;gap:44px}
+  .apply-grid{grid-template-columns:1fr;gap:36px}
+  .tracks{grid-template-columns:1fr}
+  .stats-in{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:0}
+  .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--panel-line)}
+  .dept-row{grid-template-columns:40px 1fr;gap:10px 16px}
+  .dept-row p{grid-column:2}
+  .quota{grid-column:2;justify-self:start}
+}
+@media(max-width:720px){
+  section{padding:68px 0}
+  .hero{padding:64px 0 60px}
+  .navlinks{display:none}
+  .ev{grid-template-columns:1fr;gap:8px}
+  .foot-grid{grid-template-columns:1fr}
+  .count b{font-size:22px}
+  .sample-badge{font-size:11px;padding:6px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  [data-reveal]{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<a class="sample-badge" href="../index.html">样片 · <b>页工坊</b> 出品 ↗</a>
+
+<header class="site" id="siteHeader">
+  <div class="wrap">
+    <nav class="bar" aria-label="主导航">
+      <a class="logo" href="#top">
+        <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+          <circle cx="16" cy="16" r="15" fill="none" stroke="#F2B33D" stroke-width="1.4" opacity=".55"/>
+          <circle cx="16" cy="16" r="6" fill="#F2B33D"/>
+          <ellipse cx="16" cy="16" rx="14" ry="5.6" fill="none" stroke="#6FD3E0" stroke-width="1.3" transform="rotate(-22 16 16)"/>
+          <circle cx="26" cy="9" r="1.7" fill="#fff"/>
+        </svg>
+        <span><b>星野天文社</b><small>SUDA · ASTRO</small></span>
+      </a>
+      <div class="navlinks">
+        <a href="#tracks">我们在做什么</a>
+        <a href="#dept">部门</a>
+        <a href="#sched">活动预告</a>
+        <a href="#faq">常见问题</a>
+        <a class="apply" href="#apply">报名加入</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="sky" id="sky" aria-hidden="true"></div>
+    <span class="glow" aria-hidden="true"></span>
+    <span class="glow two" aria-hidden="true"></span>
+    <div class="wrap hero-grid">
+      <div data-reveal>
+        <span class="kicker"><i class="dot"></i>2026 秋季招新 · 进行中</span>
+        <h1>抬头看，<br>这学期<em>一起数星星</em>。</h1>
+        <p class="lead">星野天文社不要求你懂天文、不要求你有望远镜。只要你愿意在晚上十点爬上天台，等一颗流星。观测、摄影、科普三条线，选一条开始就好。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#apply">现在报名</a>
+          <a class="btn btn-ghost" href="#tracks">先看看在做什么</a>
+        </div>
+      </div>
+
+      <div class="count-card" data-reveal>
+        <span class="label">Registration closes in</span>
+        <h2>报名截止倒计时</h2>
+        <p class="sub">2026 年 10 月 15 日 23:59 关闭表单</p>
+        <div class="count" id="count" role="timer">
+          <div><b id="cd-d">--</b><span>天</span></div>
+          <div><b id="cd-h">--</b><span>时</span></div>
+          <div><b id="cd-m">--</b><span>分</span></div>
+          <div><b id="cd-s">--</b><span>秒</span></div>
+        </div>
+        <div class="planets">
+          <span class="orb" aria-hidden="true"></span>
+          <p>本周观测目标：<b>土星环 + 木星四大卫星</b><br>器材由社团提供，带件厚外套就行。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="wrap">
+      <div class="stats-in">
+        <div class="stat"><b>126</b><span>在册社员</span></div>
+        <div class="stat"><b>38</b><span>本年度观测场次</span></div>
+        <div class="stat"><b>9</b><span>社内公用器材</span></div>
+        <div class="stat"><b>0</b><span>零基础门槛</span></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="tracks">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Three tracks</p>
+        <h2>三条线，选一条先上手</h2>
+        <p>不用一开始就想清楚要干嘛。先来一次活动，看看哪件事让你愿意熬夜，再决定往哪儿走。</p>
+      </div>
+      <div class="tracks">
+        <article class="track" data-reveal>
+          <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+            <path d="M4 27l8-14 6 9 4-6 8 11z" fill="none" stroke="#6FD3E0" stroke-width="1.8" stroke-linejoin="round"/>
+            <circle cx="25" cy="8" r="3.4" fill="none" stroke="#F2B33D" stroke-width="1.8"/>
+          </svg>
+          <h3>观测组</h3>
+          <p>每月两次外出观测，学认星座、调赤道仪、拍深空。器材是社团的，你只需要出现。</p>
+          <div class="tagrow"><span class="tag">月度 2 次</span><span class="tag">装备全包</span></div>
+        </article>
+        <article class="track" data-reveal style="transition-delay:.08s">
+          <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+            <rect x="5" y="12" width="24" height="15" rx="3" fill="none" stroke="#6FD3E0" stroke-width="1.8"/>
+            <circle cx="17" cy="19.5" r="5" fill="none" stroke="#F2B33D" stroke-width="1.8"/>
+            <path d="M12 12l3-4h4l3 4" fill="none" stroke="#6FD3E0" stroke-width="1.8" stroke-linejoin="round"/>
+          </svg>
+          <h3>摄影组</h3>
+          <p>从手机拍到相机导星，攒出自己的星轨和银河作品。期末办一次社内影展。</p>
+          <div class="tagrow"><span class="tag">后期教学</span><span class="tag">年度影展</span></div>
+        </article>
+        <article class="track" data-reveal style="transition-delay:.16s">
+          <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+            <circle cx="17" cy="17" r="11" fill="none" stroke="#6FD3E0" stroke-width="1.8"/>
+            <path d="M17 11v6l4 3" fill="none" stroke="#F2B33D" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="17" cy="17" r="1.6" fill="#6FD3E0"/>
+          </svg>
+          <h3>科普组</h3>
+          <p>进中小学讲课、做路边天文、写科普稿。把复杂的东西讲明白，比听懂更难，也更值钱。</p>
+          <div class="tagrow"><span class="tag">每月 1 讲</span><span class="tag">志愿时长</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="dept">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Openings</p>
+        <h2>今年开放的名额</h2>
+        <p>事务组想找愿意管事的；其余三条线都欢迎零基础。名额招满即止，不看经验看意愿。</p>
+      </div>
+      <div class="dept" data-reveal>
+        <div class="dept-row">
+          <span class="no">01</span><h3>观测组</h3>
+          <p>器材搬运、现场记录、观测数据整理</p><span class="quota">余 14 人</span>
+        </div>
+        <div class="dept-row">
+          <span class="no">02</span><h3>摄影组</h3>
+          <p>拍摄、后期、社媒素材产出</p><span class="quota">余 8 人</span>
+        </div>
+        <div class="dept-row">
+          <span class="no">03</span><h3>科普组</h3>
+          <p>讲课、写稿、对接中小学与社区</p><span class="quota">余 6 人</span>
+        </div>
+        <div class="dept-row">
+          <span class="no">04</span><h3>事务组</h3>
+          <p>活动统筹、经费与器材台账</p><span class="quota">余 3 人</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sched">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Upcoming</p>
+        <h2>开学前两个月的活动</h2>
+        <p>不报名也能先来旁听。第一次来的人通常只带手机，这就够了。</p>
+      </div>
+      <div class="sched">
+        <article class="ev" data-reveal>
+          <time>10 / 08 周三 19:30</time>
+          <div><h3>路边天文 · 月亮与土星</h3><p>校区东门广场 · 社内提供 3 台望远镜</p></div>
+          <span class="seat">剩余 26 位</span>
+        </article>
+        <article class="ev" data-reveal style="transition-delay:.06s">
+          <time>10 / 18 周六 20:00</time>
+          <div><h3>郊外观测 · 英仙座余晖</h3><p>校外营地 · 统一包车，需提前确认</p></div>
+          <span class="seat">剩余 9 位</span>
+        </article>
+        <article class="ev" data-reveal style="transition-delay:.12s">
+          <time>10 / 26 周日 14:00</time>
+          <div><h3>科普进校园 · 小学专场</h3><p>附属小学报告厅 · 讲稿由科普组打磨</p></div>
+          <span class="seat">剩余 12 位</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="apply" class="apply-sec">
+    <div class="wrap apply-grid">
+      <div class="apply-copy" data-reveal>
+        <p class="eyebrow">Join us</p>
+        <h2>填张表，<br>剩下的交给我们。</h2>
+        <p>报名不需要自荐信，也没有面试。我们会把你拉进迎新群，第一次活动前会有人专门带你熟悉流程。</p>
+        <ul class="checklist">
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8" fill="none" stroke="#5BD98A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>不收取任何会费，器材与车费由社团经费承担</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8" fill="none" stroke="#5BD98A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>时间冲突可以只参加其中一条线</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8" fill="none" stroke="#5BD98A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>科普组活动可计入志愿时长</li>
+        </ul>
+      </div>
+
+      <form id="applyForm" novalidate data-reveal>
+        <div class="field" id="f-name">
+          <label for="name">姓名 <span>*</span></label>
+          <input id="name" name="name" type="text" placeholder="怎么称呼你" autocomplete="name">
+          <p class="err">请填写姓名</p>
+        </div>
+        <div class="field" id="f-contact">
+          <label for="contact">微信号 <span>*</span></label>
+          <input id="contact" name="contact" type="text" placeholder="方便拉你进迎新群" autocomplete="off">
+          <p class="err">请填写微信号</p>
+        </div>
+        <div class="field" id="f-grad">
+          <label for="college">学院与年级</label>
+          <select id="college" name="college">
+            <option value="">请选择</option>
+            <option>光电科学与工程学院 · 大一</option>
+            <option>光电科学与工程学院 · 大二及以上</option>
+            <option>其他学院 · 大一</option>
+            <option>其他学院 · 大二及以上</option>
+          </select>
+        </div>
+        <div class="field" id="f-track">
+          <label>想加入 <span>*</span></label>
+          <div class="radios">
+            <label><input type="radio" name="track" value="观测组">观测组</label>
+            <label><input type="radio" name="track" value="摄影组">摄影组</label>
+            <label><input type="radio" name="track" value="科普组">科普组</label>
+            <label><input type="radio" name="track" value="还没想好">还没想好</label>
+          </div>
+          <p class="err">选一个吧，之后可以改</p>
+        </div>
+        <div class="field">
+          <label for="note">想说的话</label>
+          <textarea id="note" name="note" placeholder="有没有望远镜、会不会拍照、为什么想来——都可以写"></textarea>
+        </div>
+        <button class="submit" type="submit">提交报名</button>
+        <p class="form-note">我们会在 48 小时内通过微信联系你</p>
+
+        <div class="success" id="success" role="status">
+          <svg width="46" height="46" viewBox="0 0 46 46" aria-hidden="true">
+            <circle cx="23" cy="23" r="21" fill="none" stroke="#5BD98A" stroke-width="2"/>
+            <path d="M14 23.5l6 6 12-13" fill="none" stroke="#5BD98A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3>收到！</h3>
+          <p id="successText">我们在 48 小时内联系你。</p>
+          <button type="button" id="again">再填一份</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">FAQ</p>
+        <h2>报名前最常被问的四件事</h2>
+      </div>
+      <div class="faq" data-reveal>
+        <details open>
+          <summary>完全不懂天文，能加入吗？</summary>
+          <p>可以，而且大多数新社员都是这样进来的。观测组第一次活动会从"怎么找北极星"讲起；科普组的讲稿有现成底稿，你只需要会用大白话讲出来。</p>
+        </details>
+        <details>
+          <summary>没有望远镜怎么办？</summary>
+          <p>社内有 9 台公用器材，活动时统一分配，不需要自己买。如果打算长期玩，学姐学长会带你去挑二手设备，比盲买省很多钱。</p>
+        </details>
+        <details>
+          <summary>活动会和课表冲突吗？</summary>
+          <p>观测活动大多安排在周末和周三晚上，考试周停摆。三条线的活动彼此独立，加不动的时候退掉一条就行，不影响社籍。</p>
+        </details>
+        <details>
+          <summary>要交会费吗？</summary>
+          <p>不收会费。郊外观测的包车与场地费由社团经费覆盖，个人只需自理餐食。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h3>星野天文社</h3>
+        <p>活动通知发在迎新群与社团公众号。想先问清楚再来，扫右边二维码加招新负责人。</p>
+      </div>
+      <div class="qr" id="qr" role="img" aria-label="招新咨询二维码占位图"></div>
+    </div>
+    <p class="foot-note">© 2026 星野天文社 · 招新页为页工坊样片演示 · 内容与组织均为虚构</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* starfield */
+  var sky = document.getElementById('sky');
+  if (sky) {
+    var frag = document.createDocumentFragment();
+    for (var i = 0; i < 110; i++) {
+      var s = document.createElement('i');
+      var size = Math.random() < 0.86 ? 1 : 2;
+      s.style.left = (Math.random() * 100).toFixed(2) + '%';
+      s.style.top = (Math.random() * 100).toFixed(2) + '%';
+      s.style.width = s.style.height = size + 'px';
+      s.style.opacity = (0.22 + Math.random() * 0.6).toFixed(2);
+      s.style.animationDelay = (Math.random() * 4.5).toFixed(2) + 's';
+      frag.appendChild(s);
+    }
+    sky.appendChild(frag);
+  }
+
+  /* sticky header */
+  var header = document.getElementById('siteHeader');
+  function onScroll(){ header.classList.toggle('solid', window.scrollY > 24); }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* countdown to 2026-10-15 23:59 */
+  var deadline = new Date(2026, 9, 15, 23, 59, 0);
+  var el = { d: document.getElementById('cd-d'), h: document.getElementById('cd-h'),
+             m: document.getElementById('cd-m'), s: document.getElementById('cd-s') };
+  function pad(n){ return n < 10 ? '0' + n : String(n); }
+  function tick(){
+    var diff = deadline - new Date();
+    if (diff < 0) diff = 0;
+    var t = Math.floor(diff / 1000);
+    el.d.textContent = pad(Math.floor(t / 86400));
+    el.h.textContent = pad(Math.floor(t % 86400 / 3600));
+    el.m.textContent = pad(Math.floor(t % 3600 / 60));
+    el.s.textContent = pad(t % 60);
+  }
+  if (el.d) { tick(); setInterval(tick, 1000); }
+
+  /* reveal */
+  var els = document.querySelectorAll('[data-reveal]');
+  function revealAll(){ els.forEach(function(e){ e.classList.add('is-in'); }); }
+  if (!('IntersectionObserver' in window)) {
+    revealAll();
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.04 });
+    els.forEach(function(e){ io.observe(e); });
+    setTimeout(revealAll, 1200);
+    window.addEventListener('beforeprint', revealAll);
+  }
+
+  /* form validation */
+  var form = document.getElementById('applyForm');
+  var success = document.getElementById('success');
+  var successText = document.getElementById('successText');
+
+  function mark(id, bad){ document.getElementById(id).classList.toggle('invalid', bad); }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('name').value.trim();
+    var contact = document.getElementById('contact').value.trim();
+    var track = form.querySelector('input[name="track"]:checked');
+    var bad = false;
+
+    if (!name) { mark('f-name', true); bad = true; } else { mark('f-name', false); }
+    if (!contact) { mark('f-contact', true); bad = true; } else { mark('f-contact', false); }
+    if (!track) { mark('f-track', true); bad = true; } else { mark('f-track', false); }
+
+    if (bad) {
+      var first = form.querySelector('.field.invalid input');
+      if (first) first.focus();
+      return;
+    }
+    successText.textContent = name + '，我们已记下你的报名（' + track.value + '），48 小时内通过 ' + contact + ' 联系你。';
+    form.querySelectorAll('.field, .submit, .form-note').forEach(function(n){ n.style.display = 'none'; });
+    success.classList.add('on');
+  });
+
+  form.querySelectorAll('input[type="radio"]').forEach(function(r){
+    r.addEventListener('change', function(){ mark('f-track', false); });
+  });
+
+  document.getElementById('again').addEventListener('click', function(){
+    form.reset();
+    form.querySelectorAll('.field, .submit, .form-note').forEach(function(n){ n.style.display = ''; });
+    success.classList.remove('on');
+    document.getElementById('name').focus();
+  });
+
+  /* qr placeholder pattern */
+  var qr = document.getElementById('qr');
+  if (qr) {
+    var seed = [1,1,0,1,1,0,1, 1,0,0,0,1,1,0, 0,1,1,0,0,1,0, 1,0,0,1,1,0,1,
+                0,1,0,0,1,1,0, 1,0,1,1,0,0,1, 1,1,0,0,1,0,1];
+    seed.forEach(function(v){
+      var c = document.createElement('i');
+      if (!v) c.className = 'off';
+      qr.appendChild(c);
+    });
+  }
+})();
+</script>
+</body>
+</html>

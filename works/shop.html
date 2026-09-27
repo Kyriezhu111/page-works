@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>拾光面包房 · 巷口那家烤面包的店</title>
+<meta name="description" content="拾光面包房：每日现烤欧包与手冲咖啡，早晨 7 点开门，周三休息。">
+<meta name="theme-color" content="#FBF4E9">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon-180.png">
+<style>
+:root{
+  --cream:#FBF4E9;
+  --card:#FFFDF9;
+  --crust:#3A2A1E;
+  --crust-soft:#6E5A48;
+  --crust-faint:#9C8A78;
+  --line:#E8DCC9;
+  --terra:#C4703A;
+  --terra-deep:#8E4A1F;
+  --wheat:#E5B769;
+  --green:#4F7A4A;
+  --closed:#A6584B;
+  --sans:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC","Source Han Sans SC",system-ui,sans-serif;
+  --mono:Consolas,"SF Mono",Menlo,"Cascadia Mono",monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--cream);color:var(--crust);
+  font-family:var(--sans);font-size:16px;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:#F0DCBE;color:#3A2A1E}
+:focus-visible{outline:2px solid var(--terra);outline-offset:3px;border-radius:3px}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+.sample-badge{
+  position:fixed;right:20px;bottom:18px;z-index:60;
+  display:flex;align-items:center;gap:8px;
+  background:rgba(58,42,30,.9);backdrop-filter:blur(10px);
+  border-radius:999px;padding:7px 15px;font-size:12px;color:#EFE3D2;
+  text-decoration:none;font-family:var(--mono);letter-spacing:.04em;
+}
+.sample-badge b{color:var(--wheat);font-weight:700}
+.sample-badge:hover{background:var(--crust)}
+
+.strip{background:var(--crust);color:#F3E7D6;font-size:13.5px;font-family:var(--mono);letter-spacing:.03em}
+.strip-in{display:flex;justify-content:space-between;align-items:center;gap:16px;height:38px;flex-wrap:wrap}
+.strip a{color:#F3E7D6;text-decoration:none;border-bottom:1px solid rgba(243,231,214,.35)}
+.strip a:hover{border-bottom-color:var(--wheat);color:#fff}
+
+header.site{
+  position:sticky;top:0;z-index:40;
+  background:rgba(251,244,233,.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+nav.bar{display:flex;align-items:center;justify-content:space-between;gap:24px;height:68px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo svg{display:block;flex:none}
+.logo b{font-size:17px;font-weight:800;letter-spacing:.03em;display:block}
+.logo small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--crust-faint)}
+.navlinks{display:flex;align-items:center;gap:2px}
+.navlinks a{
+  text-decoration:none;color:var(--crust-soft);font-size:14.5px;font-weight:600;
+  padding:8px 14px;border-radius:5px;transition:all .15s ease;
+}
+.navlinks a:hover{color:var(--crust);background:#F3E8D7}
+.navlinks a.call{
+  background:var(--terra);color:#fff;margin-left:10px;
+}
+.navlinks a.call:hover{background:var(--terra-deep)}
+
+/* hero */
+.hero{padding:70px 0 0;position:relative;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(closest-side,rgba(229,183,105,.28),transparent 70%) top right/620px 460px no-repeat,
+    radial-gradient(closest-side,rgba(196,112,58,.14),transparent 72%) bottom left/520px 420px no-repeat;
+}
+.hero-in{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:60px;align-items:center}
+.status{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--card);border:1px solid var(--line);border-radius:999px;
+  padding:7px 16px;font-size:13.5px;font-weight:600;margin-bottom:24px;
+}
+.status .dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex:none}
+.status.closed .dot{background:var(--closed)}
+.status.closed b{color:var(--closed)}
+.status b{color:var(--green)}
+.status span{color:var(--crust-faint);font-weight:400}
+h1{font-size:clamp(36px,5.6vw,60px);line-height:1.14;letter-spacing:-.02em;margin:0 0 20px;font-weight:800}
+h1 em{font-style:normal;color:var(--terra-deep);position:relative}
+h1 em::after{
+  content:"";position:absolute;left:0;right:0;bottom:4px;height:9px;
+  background:rgba(229,183,105,.5);z-index:-1;border-radius:2px;
+}
+.lead{color:var(--crust-soft);font-size:17px;margin:0 0 30px;max-width:30em}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  font-size:15px;font-weight:700;padding:14px 26px;border-radius:7px;
+  border:1px solid transparent;transition:all .16s ease;
+}
+.btn-primary{background:var(--terra);color:#fff;box-shadow:0 6px 18px -8px rgba(142,74,31,.7)}
+.btn-primary:hover{background:var(--terra-deep)}
+.btn-ghost{border-color:var(--line);color:var(--crust);background:var(--card)}
+.btn-ghost:hover{border-color:var(--crust-faint)}
+.hero-note{display:flex;gap:22px;flex-wrap:wrap;font-size:13.5px;color:var(--crust-faint)}
+.hero-note span{display:flex;align-items:center;gap:7px}
+
+/* hero art */
+.shop-art{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:26px;box-shadow:0 30px 60px -40px rgba(58,42,30,.5);
+}
+.shop-art svg{display:block;width:100%;height:auto;border-radius:10px}
+.art-cap{display:flex;justify-content:space-between;align-items:center;margin-top:18px;font-size:13px;color:var(--crust-faint)}
+.art-cap b{color:var(--crust);font-weight:700}
+
+section{padding:88px 0}
+.sec-head{max-width:620px;margin-bottom:44px}
+.eyebrow{
+  display:flex;align-items:center;gap:10px;font-family:var(--mono);
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--terra-deep);margin:0 0 14px;font-weight:700;
+}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--terra-deep)}
+.sec-head h2{font-size:clamp(26px,3.8vw,38px);line-height:1.26;margin:0 0 14px;font-weight:800;letter-spacing:-.01em}
+.sec-head p{color:var(--crust-soft);margin:0}
+
+/* signature products */
+.cakes{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.cake{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:22px;transition:transform .2s ease,box-shadow .2s ease;position:relative;
+}
+.cake:hover{transform:translateY(-4px);box-shadow:0 20px 40px -28px rgba(58,42,30,.6)}
+.cake svg{display:block;width:100%;height:96px;margin-bottom:16px}
+.cake h3{font-size:16.5px;margin:0 0 6px;font-weight:700}
+.cake p{margin:0 0 14px;color:var(--crust-faint);font-size:13.5px;min-height:2.6em}
+.cake .price{font-family:var(--mono);font-size:17px;font-weight:700;color:var(--terra-deep)}
+.cake .price small{font-size:12px;color:var(--crust-faint);font-weight:400;margin-left:4px}
+.hot{
+  position:absolute;top:14px;right:14px;background:var(--wheat);color:#4A3410;
+  font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;
+}
+
+/* menu */
+.menu-sec{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.menu-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:30px}
+.menu-tabs button{
+  font-family:var(--sans);font-size:14px;font-weight:700;color:var(--crust-soft);
+  background:transparent;border:1px solid var(--line);border-radius:999px;
+  padding:8px 20px;cursor:pointer;transition:all .16s ease;
+}
+.menu-tabs button:hover{border-color:var(--crust-faint);color:var(--crust)}
+.menu-tabs button[aria-pressed="true"]{background:var(--crust);border-color:var(--crust);color:#F8F1E5}
+.menu-list{display:grid;grid-template-columns:1fr 1fr;gap:0 52px}
+.mi{
+  display:grid;grid-template-columns:1fr auto;gap:14px;align-items:baseline;
+  padding:15px 0;border-bottom:1px dashed var(--line);
+}
+.mi.hide{display:none}
+.mi h3{margin:0 0 3px;font-size:16px;font-weight:700}
+.mi .desc{margin:0;font-size:13.5px;color:var(--crust-faint)}
+.mi .p{font-family:var(--mono);font-size:15.5px;font-weight:700;color:var(--terra-deep);white-space:nowrap}
+.menu-foot{margin-top:30px;font-size:13.5px;color:var(--crust-faint);display:flex;gap:10px;align-items:flex-start}
+.menu-foot svg{flex:none;margin-top:4px}
+
+/* hours + visit */
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.hours{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.hours h3{margin:0;padding:20px 24px;font-size:16px;border-bottom:1px solid var(--line);font-weight:700}
+.hrow{display:flex;justify-content:space-between;padding:13px 24px;border-bottom:1px solid #F2EADB;font-size:14.5px}
+.hrow:last-child{border-bottom:0}
+.hrow.today{background:#FBF1DF;font-weight:700}
+.hrow .d{color:var(--crust-soft)}
+.hrow.today .d{color:var(--crust)}
+.hrow .t{font-family:var(--mono);font-size:13.5px}
+.hrow .t.off{color:var(--closed)}
+.today-tag{
+  font-family:var(--sans);font-size:11px;font-weight:700;background:var(--terra);color:#fff;
+  border-radius:4px;padding:2px 7px;margin-left:9px;vertical-align:1px;
+}
+.visit-copy h3{font-size:20px;margin:0 0 14px;font-weight:700}
+.visit-copy p{color:var(--crust-soft);margin:0 0 18px}
+.addr{
+  background:var(--card);border:1px solid var(--line);border-left:4px solid var(--terra);
+  border-radius:0 10px 10px 0;padding:18px 22px;margin-bottom:22px;
+}
+.addr b{display:block;font-size:15.5px;margin-bottom:4px}
+.addr span{font-size:13.5px;color:var(--crust-faint)}
+.routes{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:11px}
+.routes li{display:flex;gap:11px;font-size:14.5px;color:var(--crust-soft)}
+.routes li b{color:var(--crust);font-weight:700;flex:none}
+
+/* map placeholder */
+.map{
+  position:relative;height:230px;border-radius:14px;border:1px solid var(--line);
+  background:
+    linear-gradient(90deg,rgba(232,220,201,.55) 1px,transparent 1px) 0 0/46px 46px,
+    linear-gradient(0deg,rgba(232,220,201,.55) 1px,transparent 1px) 0 0/46px 46px,
+    var(--card);
+  overflow:hidden;margin-bottom:18px;
+}
+.map .road{position:absolute;background:#F1E4CE}
+.map .road.h{left:0;right:0;top:96px;height:26px}
+.map .road.v{top:0;bottom:0;left:148px;width:22px}
+.map .park{position:absolute;left:20px;top:14px;width:104px;height:62px;border-radius:8px;background:#DCE8D5}
+.map .pin{
+  position:absolute;left:148px;top:96px;transform:translate(-50%,-100%);
+  width:30px;height:30px;
+}
+.map .label{
+  position:absolute;left:170px;top:132px;background:var(--crust);color:#F8F1E5;
+  font-size:12px;font-weight:700;padding:5px 11px;border-radius:5px;white-space:nowrap;
+}
+.map .muted{position:absolute;right:12px;bottom:10px;font-family:var(--mono);font-size:10.5px;color:var(--crust-faint)}
+
+/* cta */
+.cta{
+  background:var(--crust);color:#F8F1E5;border-radius:18px;
+  padding:52px 44px;display:grid;grid-template-columns:1.3fr auto;gap:36px;align-items:center;
+}
+.cta h2{font-size:clamp(24px,3.4vw,34px);margin:0 0 12px;font-weight:800;line-height:1.3;color:#fff}
+.cta p{margin:0;color:#D8C7B2;font-size:15.5px}
+.cta-actions{display:flex;gap:12px;flex-wrap:wrap}
+.cta .btn-ghost{border-color:rgba(248,241,229,.3);background:transparent;color:#F8F1E5}
+.cta .btn-ghost:hover{border-color:#F8F1E5;background:rgba(255,255,255,.08)}
+.cta .btn-primary{background:var(--wheat);color:#4A3410}
+.cta .btn-primary:hover{background:#F0C67F}
+
+footer{padding:44px 0 84px;border-top:1px solid var(--line);margin-top:70px}
+.foot-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--crust-faint)}
+.foot-row a{text-decoration:none;border-bottom:1px solid var(--line)}
+
+[data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+[data-reveal].is-in{opacity:1;transform:none}
+
+@media(max-width:960px){
+  .hero-in{grid-template-columns:1fr;gap:40px}
+  .cakes{grid-template-columns:repeat(2,1fr)}
+  .menu-list{grid-template-columns:1fr;gap:0}
+  .visit-grid{grid-template-columns:1fr;gap:40px}
+  .cta{grid-template-columns:1fr;padding:40px 30px}
+}
+@media(max-width:640px){
+  section{padding:62px 0}
+  .navlinks a:not(.call){display:none}
+  .cakes{grid-template-columns:1fr}
+  .strip-in{height:auto;padding:8px 0;font-size:12.5px}
+  .sample-badge{right:14px;bottom:12px;font-size:11px;padding:6px 12px}
+  .map .label{left:auto;right:10px;top:150px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  [data-reveal]{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="strip">
+  <div class="wrap strip-in">
+    <span>每日 6:30 开炉 · 现烤面包出炉时间 7:00 / 11:00 / 15:30</span>
+    <span>周三休息 &nbsp;·&nbsp; <a href="tel:0512-00000000">0512-0000 0000</a></span>
+  </div>
+</div>
+
+<a class="sample-badge" href="../index.html">样片 · <b>页工坊</b> 出品 ↗</a>
+
+<header class="site">
+  <div class="wrap">
+    <nav class="bar" aria-label="主导航">
+      <a class="logo" href="#top">
+        <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+          <circle cx="17" cy="17" r="16" fill="#3A2A1E"/>
+          <path d="M9 22c0-7 5.5-12 12-12 0 7-5.4 12-12 12z" fill="#E5B769"/>
+          <path d="M9 22c4-3 7-7 8.5-12" stroke="#3A2A1E" stroke-width="1.2" fill="none"/>
+          <circle cx="24.5" cy="10.5" r="2.2" fill="#C4703A"/>
+        </svg>
+        <span><b>拾光面包房</b><small>SHIGUANG BAKERY</small></span>
+      </a>
+      <div class="navlinks">
+        <a href="#signature">招牌</a>
+        <a href="#menu">菜单</a>
+        <a href="#visit">营业与位置</a>
+        <a class="call" href="tel:0512-00000000">打电话</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div data-reveal>
+        <span class="status" id="status"><i class="dot"></i><b>正在查询营业状态…</b></span>
+        <h1>巷口那家<br><em>每天现烤</em>的<br>面包房。</h1>
+        <p class="lead">没有中央厨房，没有隔夜面包。早上 6:30 开炉，卖完就关门。面包师傅姓陈，你要是问得勤快点，他会多给你切一片试吃。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#menu">看看今天吃什么</a>
+          <a class="btn btn-ghost" href="#visit">怎么走</a>
+        </div>
+        <div class="hero-note">
+          <span>🕖 平日 7:00 — 19:30</span>
+          <span>🕗 周末 8:00 — 20:30</span>
+          <span>🚫 周三休息</span>
+        </div>
+      </div>
+
+      <div class="shop-art" data-reveal>
+        <svg viewBox="0 0 400 260" role="img" aria-label="面包房店面插画：暖色雨棚、橱窗里的面包、木门与门口绿植">
+          <rect width="400" height="260" fill="#F7EBDA"/>
+          <rect x="0" y="216" width="400" height="44" fill="#EFE0C9"/>
+          <rect x="26" y="58" width="348" height="162" rx="7" fill="#FFFDF9" stroke="#E8DCC9"/>
+
+          <g>
+            <rect x="26" y="58" width="348" height="14" fill="#3A2A1E"/>
+            <rect x="26" y="72" width="348" height="6" fill="#E5B769"/>
+            <rect x="26" y="78" width="348" height="4" fill="#C4703A"/>
+          </g>
+
+          <rect x="130" y="92" width="140" height="34" rx="7" fill="#3A2A1E"/>
+          <text x="200" y="115" text-anchor="middle" font-family="Microsoft YaHei UI, Microsoft YaHei, sans-serif" font-size="17" font-weight="700" fill="#F3E7D6" letter-spacing="2">拾光面包房</text>
+
+          <rect x="52" y="142" width="140" height="66" rx="5" fill="#F6E7CE" stroke="#E8DCC9"/>
+          <ellipse cx="92" cy="188" rx="20" ry="12" fill="#D89A4E"/>
+          <ellipse cx="76" cy="190" rx="9" ry="7" fill="#C4832F"/>
+          <ellipse cx="108" cy="190" rx="9" ry="7" fill="#C4832F"/>
+          <ellipse cx="140" cy="188" rx="17" ry="11" fill="#E0B071"/>
+          <path d="M134 182c4 3 8 4 12 2" stroke="#C08A45" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M138 189c4 3 8 4 12 2" stroke="#C08A45" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <rect x="52" y="136" width="140" height="6" rx="3" fill="#E8DCC9"/>
+
+          <rect x="216" y="142" width="76" height="78" rx="5" fill="#8E4A1F"/>
+          <rect x="224" y="150" width="26" height="34" rx="3" fill="#F6E7CE" opacity=".35"/>
+          <rect x="258" y="150" width="26" height="34" rx="3" fill="#F6E7CE" opacity=".35"/>
+          <circle cx="284" cy="182" r="3.4" fill="#E5B769"/>
+
+          <g>
+            <ellipse cx="330" cy="204" rx="21" ry="10" fill="#C4703A"/>
+            <path d="M330 194c0-16 6-26 14-32-2 12-4 22-6 32z" fill="#4F7A4A"/>
+            <path d="M328 196c-6-14-16-20-26-21 8 9 14 15 18 23z" fill="#4F7A4A"/>
+            <path d="M330 196c2-13 10-22 20-26-6 10-10 17-12 27z" fill="#6E9A62"/>
+          </g>
+
+          <g transform="translate(28,206)">
+            <rect x="0" y="6" width="30" height="10" rx="3" fill="#D8C7B2"/>
+            <rect x="4" y="0" width="22" height="8" rx="3" fill="#C9B79F"/>
+          </g>
+          <g transform="translate(348,208)">
+            <rect x="0" y="4" width="26" height="9" rx="3" fill="#D8C7B2"/>
+            <rect x="3" y="0" width="20" height="6" rx="3" fill="#C9B79F"/>
+          </g>
+        </svg>
+        <div class="art-cap">
+          <span><b>平江路 · 巷口店</b> · 开了 7 年</span>
+          <span class="mono">NO.01</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="signature">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Bestsellers</p>
+        <h2>卖得最好的四样</h2>
+        <p>每天出炉数量有限，下午三点半那一炉通常到五点半就没了。想买招牌建议上午来。</p>
+      </div>
+      <div class="cakes">
+        <article class="cake" data-reveal>
+          <span class="hot">最常卖完</span>
+          <svg viewBox="0 0 120 80" aria-hidden="true">
+            <ellipse cx="60" cy="46" rx="30" ry="17" fill="#D89A4E"/>
+            <ellipse cx="32" cy="49" rx="15" ry="11" fill="#C4832F"/>
+            <ellipse cx="88" cy="49" rx="15" ry="11" fill="#C4832F"/>
+            <path d="M48 32c4 8 4 20 0 28" stroke="#B87A31" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+            <path d="M72 32c-4 8-4 20 0 28" stroke="#B87A31" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          </svg>
+          <h3>经典可颂</h3>
+          <p>比利时黄油，27 层，烤到边缘微微焦</p>
+          <span class="price">¥16 <small>/ 只</small></span>
+        </article>
+        <article class="cake" data-reveal style="transition-delay:.06s">
+          <svg viewBox="0 0 120 80" aria-hidden="true">
+            <path d="M22 58c0-21 17-35 38-35s38 14 38 35z" fill="#E0B071"/>
+            <path d="M34 44c6 4 13 5 19 3" stroke="#C08A45" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <path d="M42 34c6 4 13 5 19 3" stroke="#C08A45" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <rect x="18" y="56" width="84" height="7" rx="3.5" fill="#C4832F"/>
+          </svg>
+          <h3>酸种欧包</h3>
+          <p>天然酵种发酵 18 小时，外壳脆、内里湿</p>
+          <span class="price">¥32 <small>/ 个</small></span>
+        </article>
+        <article class="cake" data-reveal style="transition-delay:.12s">
+          <svg viewBox="0 0 120 80" aria-hidden="true">
+            <circle cx="60" cy="44" r="27" fill="#D9A25E"/>
+            <path d="M60 20c13 0 24 11 24 24s-11 24-24 24" stroke="#B87A31" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M60 28c9 0 16 7 16 16s-7 16-16 16" stroke="#B87A31" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M60 36c4.5 0 8 3.5 8 8s-3.5 8-8 8" stroke="#B87A31" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <rect x="20" y="66" width="80" height="6" rx="3" fill="#E5B769"/>
+          </svg>
+          <h3>肉桂卷</h3>
+          <p>现磨肉桂，出炉后淋一层糖霜</p>
+          <span class="price">¥20 <small>/ 个</small></span>
+        </article>
+        <article class="cake" data-reveal style="transition-delay:.18s">
+          <svg viewBox="0 0 120 80" aria-hidden="true">
+            <path d="M34 16h52l-10 26H44z" fill="#FFFDF9" stroke="#E8DCC9" stroke-width="2"/>
+            <path d="M44 42h32v22a4 4 0 0 1-4 4H48a4 4 0 0 1-4-4z" fill="#8E4A1F"/>
+            <path d="M76 48h6a6 6 0 0 1 0 12h-6" fill="none" stroke="#8E4A1F" stroke-width="4"/>
+            <path d="M56 24c0 6 8 6 8 12" stroke="#B87A31" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          </svg>
+          <h3>手冲单品</h3>
+          <p>豆子每周换，问店员今天是哪一支</p>
+          <span class="price">¥28 <small>/ 杯</small></span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu" class="menu-sec">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Menu</p>
+        <h2>完整价目表</h2>
+        <p>价格自 2026 年 9 月起执行。堂食与外带同价，自带杯立减 3 元。</p>
+      </div>
+
+      <div class="menu-tabs" id="menuTabs" role="group" aria-label="菜单分类">
+        <button type="button" data-cat="coffee" aria-pressed="true">咖啡</button>
+        <button type="button" data-cat="bread" aria-pressed="false">面包</button>
+        <button type="button" data-cat="light" aria-pressed="false">轻食</button>
+      </div>
+
+      <div class="menu-list" id="menuList">
+        <div class="mi" data-cat="coffee">
+          <div><h3>手冲单品</h3><p class="desc">每周轮换单一产区，可做冰</p></div>
+          <span class="p">¥28</span>
+        </div>
+        <div class="mi" data-cat="coffee">
+          <div><h3>燕麦拿铁</h3><p class="desc">燕麦奶，默认少糖</p></div>
+          <span class="p">¥30</span>
+        </div>
+        <div class="mi" data-cat="coffee">
+          <div><h3>拿铁</h3><p class="desc">自家拼配豆，奶味偏重</p></div>
+          <span class="p">¥26</span>
+        </div>
+        <div class="mi" data-cat="coffee">
+          <div><h3>冷萃</h3><p class="desc">冷泡 16 小时，每天限量 20 杯</p></div>
+          <span class="p">¥30</span>
+        </div>
+        <div class="mi" data-cat="coffee">
+          <div><h3>美式</h3><p class="desc">热 / 冰同价</p></div>
+          <span class="p">¥22</span>
+        </div>
+        <div class="mi" data-cat="coffee">
+          <div><h3>气泡美式</h3><p class="desc">夏天限定，冬天会下架</p></div>
+          <span class="p">¥26</span>
+        </div>
+
+        <div class="mi hide" data-cat="bread">
+          <div><h3>经典可颂</h3><p class="desc">比利时黄油，27 层</p></div>
+          <span class="p">¥16</span>
+        </div>
+        <div class="mi hide" data-cat="bread">
+          <div><h3>酸种欧包</h3><p class="desc">18 小时天然发酵，整只 / 半只</p></div>
+          <span class="p">¥32</span>
+        </div>
+        <div class="mi hide" data-cat="bread">
+          <div><h3>肉桂卷</h3><p class="desc">现磨肉桂，限量 30 个</p></div>
+          <span class="p">¥20</span>
+        </div>
+        <div class="mi hide" data-cat="bread">
+          <div><h3>果干乡村包</h3><p class="desc">无糖无油，蔓越莓与核桃</p></div>
+          <span class="p">¥34</span>
+        </div>
+        <div class="mi hide" data-cat="bread">
+          <div><h3>全麦吐司</h3><p class="desc">整条不切片，可代切</p></div>
+          <span class="p">¥26</span>
+        </div>
+        <div class="mi hide" data-cat="bread">
+          <div><h3>碱水结</h3><p class="desc">咸香有嚼劲，配啤酒也不错</p></div>
+          <span class="p">¥15</span>
+        </div>
+
+        <div class="mi hide" data-cat="light">
+          <div><h3>牛油果吐司</h3><p class="desc">酸种厚切，加溏心蛋 +5 元</p></div>
+          <span class="p">¥32</span>
+        </div>
+        <div class="mi hide" data-cat="light">
+          <div><h3>烟熏鸡胸三明治</h3><p class="desc">现点现做，约等 8 分钟</p></div>
+          <span class="p">¥36</span>
+        </div>
+        <div class="mi hide" data-cat="light">
+          <div><h3>南瓜浓汤</h3><p class="desc">配一片酸种，冬天才有</p></div>
+          <span class="p">¥24</span>
+        </div>
+        <div class="mi hide" data-cat="light">
+          <div><h3>凯撒沙拉</h3><p class="desc">自制酱，可选不加培根</p></div>
+          <span class="p">¥34</span>
+        </div>
+      </div>
+
+      <p class="menu-foot">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+          <circle cx="8" cy="8" r="6.6" fill="none" stroke="#C4703A" stroke-width="1.5"/>
+          <path d="M8 4.6v4.2M8 11.2h.01" stroke="#C4703A" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span>所有面包当日现烤、当日售完即止，不隔夜销售。整只蛋糕与外带聚会餐需提前 3 天预订。</span>
+      </p>
+    </div>
+  </section>
+
+  <section id="visit">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Visit</p>
+        <h2>营业时间与怎么走</h2>
+        <p>店面不大，一共 12 个座位。工作日早上八点前来基本不用等，周末午后常常要拼桌。</p>
+      </div>
+
+      <div class="visit-grid">
+        <div class="hours" data-reveal>
+          <h3>营业时间</h3>
+          <div class="hrow" data-day="1"><span class="d">周一</span><span class="t">07:00 — 19:30</span></div>
+          <div class="hrow" data-day="2"><span class="d">周二</span><span class="t">07:00 — 19:30</span></div>
+          <div class="hrow" data-day="3"><span class="d">周三</span><span class="t off">休息</span></div>
+          <div class="hrow" data-day="4"><span class="d">周四</span><span class="t">07:00 — 19:30</span></div>
+          <div class="hrow" data-day="5"><span class="d">周五</span><span class="t">07:00 — 19:30</span></div>
+          <div class="hrow" data-day="6"><span class="d">周六</span><span class="t">08:00 — 20:30</span></div>
+          <div class="hrow" data-day="0"><span class="d">周日</span><span class="t">08:00 — 20:30</span></div>
+        </div>
+
+        <div class="visit-copy" data-reveal>
+          <h3>找到我们</h3>
+          <div class="addr">
+            <b>苏州市姑苏区平江路 · 巷口 12 号</b>
+            <span>门口有一棵很大的梧桐，认树比认门牌快</span>
+          </div>
+          <div class="map" role="img" aria-label="位置示意图：平江路巷口，地铁 4 号线出站步行约 6 分钟">
+            <span class="road h"></span>
+            <span class="road v"></span>
+            <span class="park"></span>
+            <svg class="pin" viewBox="0 0 30 30" aria-hidden="true">
+              <path d="M15 28c0 0-10-11.4-10-17A10 10 0 0 1 25 11c0 5.6-10 17-10 17z" fill="#C4703A"/>
+              <circle cx="15" cy="11" r="3.8" fill="#FFFDF9"/>
+            </svg>
+            <span class="label">拾光面包房</span>
+            <span class="muted">示意地图 · 非实际比例</span>
+          </div>
+          <ul class="routes">
+            <li><b>地铁</b><span>4 号线「平江路」站 2 号口出，沿巷子直走约 6 分钟</span></li>
+            <li><b>公交</b><span>游 5 路 / 202 路「平江路站」下，步行 3 分钟</span></li>
+            <li><b>自驾</b><span>巷内不能停车，建议停对面商场地下车库（首小时 5 元）</span></li>
+          </ul>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="tel:0512-00000000">打电话订面包</a>
+            <a class="btn btn-ghost" href="#menu">先看菜单</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cta" data-reveal>
+        <div>
+          <h2>明天早上七点，<br>第一炉可颂出炉。</h2>
+          <p>想让面包师傅给你留一份，提前打个电话就行；要订整只蛋糕或聚会餐，请提前三天。</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="tel:0512-00000000">0512-0000 0000</a>
+          <a class="btn btn-ghost" href="#visit">看营业时间</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <span>© 2026 拾光面包房 · 本页为页工坊样片，店铺与地址均为虚构</span>
+      <span><a href="../index.html">返回工具箱</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ---- business hours ---- */
+  var HOURS = {
+    0: [8, 0, 20, 30],
+    1: [7, 0, 19, 30],
+    2: [7, 0, 19, 30],
+    3: null,
+    4: [7, 0, 19, 30],
+    5: [7, 0, 19, 30],
+    6: [8, 0, 20, 30]
+  };
+  function hhmm(h, m){ return (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m); }
+
+  var box = document.getElementById('status');
+  var now = new Date();
+  var day = now.getDay();
+  var mins = now.getHours() * 60 + now.getMinutes();
+  var today = HOURS[day];
+  var nextDay = day, nextSpan = null, probe = 0;
+  while (probe < 7) {
+    nextDay = (day + probe) % 7;
+    if (HOURS[nextDay]) { nextSpan = HOURS[nextDay]; break; }
+    probe++;
+  }
+  var openTxt = nextSpan ? hhmm(nextSpan[0], nextSpan[1]) : '--:--';
+  var closeTxt = nextSpan ? hhmm(nextSpan[2], nextSpan[3]) : '--:--';
+
+  var mark, label, note;
+  if (!today) {
+    mark = 'closed';
+    label = '今日休息';
+    note = probe === 1 ? '明天 ' + openTxt + ' 见' : '下次营业 ' + openTxt;
+  } else {
+    var open = today[0] * 60 + today[1];
+    var close = today[2] * 60 + today[3];
+    if (mins < open) {
+      mark = 'closed';
+      label = '还没开门';
+      note = openTxt + ' 开始营业';
+    } else if (mins >= close) {
+      mark = 'closed';
+      label = '已打烊';
+      note = probe === 1 ? '明天 ' + openTxt + ' 见' : '下次营业 ' + openTxt;
+    } else if (close - mins <= 60) {
+      mark = '';
+      label = '即将打烊';
+      note = closeTxt + ' 关门，最后 1 小时';
+    } else {
+      mark = '';
+      label = '正在营业';
+      note = closeTxt + ' 关门';
+    }
+  }
+  box.className = 'status' + (mark ? ' ' + mark : '');
+  box.innerHTML = '<i class="dot"></i><b>' + label + '</b><span>' + note + '</span>';
+  box.setAttribute('title', '根据本机时间实时计算');
+
+  /* ---- highlight today's row ---- */
+  document.querySelectorAll('.hrow').forEach(function(row){
+    if (Number(row.getAttribute('data-day')) === day) {
+      row.classList.add('today');
+      var d = row.querySelector('.d');
+      var tag = document.createElement('span');
+      tag.className = 'today-tag';
+      tag.textContent = '今天';
+      d.appendChild(tag);
+    }
+  });
+
+  /* ---- menu tabs ---- */
+  var tabs = document.getElementById('menuTabs');
+  var items = document.querySelectorAll('#menuList .mi');
+  tabs.addEventListener('click', function(e){
+    var btn = e.target.closest('button[data-cat]');
+    if (!btn) return;
+    var cat = btn.getAttribute('data-cat');
+    tabs.querySelectorAll('button').forEach(function(b){
+      b.setAttribute('aria-pressed', String(b === btn));
+    });
+    items.forEach(function(it){
+      it.classList.toggle('hide', it.getAttribute('data-cat') !== cat);
+    });
+  });
+
+  /* ---- reveal ---- */
+  var els = document.querySelectorAll('[data-reveal]');
+  function revealAll(){ els.forEach(function(e){ e.classList.add('is-in'); }); }
+  if (!('IntersectionObserver' in window)) {
+    revealAll();
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.05 });
+    els.forEach(function(e){ io.observe(e); });
+    setTimeout(revealAll, 1200);
+    window.addEventListener('beforeprint', revealAll);
+  }
+})();
+</script>
+</body>
+</html>
